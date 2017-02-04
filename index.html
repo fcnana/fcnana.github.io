@@ -1,9 +1,332 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>サンプル</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>チーム分け | FC NaNA</title>
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<style type="text/css">
+			.label-error {
+				color: #f08080;
+			}
+		</style>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script>
+		/*! jQuery Validation Plugin - v1.14.0 - 6/30/2015
+		 * http://jqueryvalidation.org/
+		 * Copyright (c) 2015 Jörn Zaefferer; Licensed MIT */
+		!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){a.extend(a.fn,{validate:function(b){if(!this.length)return void(b&&b.debug&&window.console&&console.warn("Nothing selected, can't validate, returning nothing."));var c=a.data(this[0],"validator");return c?c:(this.attr("novalidate","novalidate"),c=new a.validator(b,this[0]),a.data(this[0],"validator",c),c.settings.onsubmit&&(this.on("click.validate",":submit",function(b){c.settings.submitHandler&&(c.submitButton=b.target),a(this).hasClass("cancel")&&(c.cancelSubmit=!0),void 0!==a(this).attr("formnovalidate")&&(c.cancelSubmit=!0)}),this.on("submit.validate",function(b){function d(){var d,e;return c.settings.submitHandler?(c.submitButton&&(d=a("<input type='hidden'/>").attr("name",c.submitButton.name).val(a(c.submitButton).val()).appendTo(c.currentForm)),e=c.settings.submitHandler.call(c,c.currentForm,b),c.submitButton&&d.remove(),void 0!==e?e:!1):!0}return c.settings.debug&&b.preventDefault(),c.cancelSubmit?(c.cancelSubmit=!1,d()):c.form()?c.pendingRequest?(c.formSubmitted=!0,!1):d():(c.focusInvalid(),!1)})),c)},valid:function(){var b,c,d;return a(this[0]).is("form")?b=this.validate().form():(d=[],b=!0,c=a(this[0].form).validate(),this.each(function(){b=c.element(this)&&b,d=d.concat(c.errorList)}),c.errorList=d),b},rules:function(b,c){var d,e,f,g,h,i,j=this[0];if(b)switch(d=a.data(j.form,"validator").settings,e=d.rules,f=a.validator.staticRules(j),b){case"add":a.extend(f,a.validator.normalizeRule(c)),delete f.messages,e[j.name]=f,c.messages&&(d.messages[j.name]=a.extend(d.messages[j.name],c.messages));break;case"remove":return c?(i={},a.each(c.split(/\s/),function(b,c){i[c]=f[c],delete f[c],"required"===c&&a(j).removeAttr("aria-required")}),i):(delete e[j.name],f)}return g=a.validator.normalizeRules(a.extend({},a.validator.classRules(j),a.validator.attributeRules(j),a.validator.dataRules(j),a.validator.staticRules(j)),j),g.required&&(h=g.required,delete g.required,g=a.extend({required:h},g),a(j).attr("aria-required","true")),g.remote&&(h=g.remote,delete g.remote,g=a.extend(g,{remote:h})),g}}),a.extend(a.expr[":"],{blank:function(b){return!a.trim(""+a(b).val())},filled:function(b){return!!a.trim(""+a(b).val())},unchecked:function(b){return!a(b).prop("checked")}}),a.validator=function(b,c){this.settings=a.extend(!0,{},a.validator.defaults,b),this.currentForm=c,this.init()},a.validator.format=function(b,c){return 1===arguments.length?function(){var c=a.makeArray(arguments);return c.unshift(b),a.validator.format.apply(this,c)}:(arguments.length>2&&c.constructor!==Array&&(c=a.makeArray(arguments).slice(1)),c.constructor!==Array&&(c=[c]),a.each(c,function(a,c){b=b.replace(new RegExp("\\{"+a+"\\}","g"),function(){return c})}),b)},a.extend(a.validator,{defaults:{messages:{},groups:{},rules:{},errorClass:"error",validClass:"valid",errorElement:"label",focusCleanup:!1,focusInvalid:!0,errorContainer:a([]),errorLabelContainer:a([]),onsubmit:!0,ignore:":hidden",ignoreTitle:!1,onfocusin:function(a){this.lastActive=a,this.settings.focusCleanup&&(this.settings.unhighlight&&this.settings.unhighlight.call(this,a,this.settings.errorClass,this.settings.validClass),this.hideThese(this.errorsFor(a)))},onfocusout:function(a){this.checkable(a)||!(a.name in this.submitted)&&this.optional(a)||this.element(a)},onkeyup:function(b,c){var d=[16,17,18,20,35,36,37,38,39,40,45,144,225];9===c.which&&""===this.elementValue(b)||-1!==a.inArray(c.keyCode,d)||(b.name in this.submitted||b===this.lastElement)&&this.element(b)},onclick:function(a){a.name in this.submitted?this.element(a):a.parentNode.name in this.submitted&&this.element(a.parentNode)},highlight:function(b,c,d){"radio"===b.type?this.findByName(b.name).addClass(c).removeClass(d):a(b).addClass(c).removeClass(d)},unhighlight:function(b,c,d){"radio"===b.type?this.findByName(b.name).removeClass(c).addClass(d):a(b).removeClass(c).addClass(d)}},setDefaults:function(b){a.extend(a.validator.defaults,b)},messages:{required:"This field is required.",remote:"Please fix this field.",email:"Please enter a valid email address.",url:"Please enter a valid URL.",date:"Please enter a valid date.",dateISO:"Please enter a valid date ( ISO ).",number:"Please enter a valid number.",digits:"Please enter only digits.",creditcard:"Please enter a valid credit card number.",equalTo:"Please enter the same value again.",maxlength:a.validator.format("Please enter no more than {0} characters."),minlength:a.validator.format("Please enter at least {0} characters."),rangelength:a.validator.format("Please enter a value between {0} and {1} characters long."),range:a.validator.format("Please enter a value between {0} and {1}."),max:a.validator.format("Please enter a value less than or equal to {0}."),min:a.validator.format("Please enter a value greater than or equal to {0}.")},autoCreateRanges:!1,prototype:{init:function(){function b(b){var c=a.data(this.form,"validator"),d="on"+b.type.replace(/^validate/,""),e=c.settings;e[d]&&!a(this).is(e.ignore)&&e[d].call(c,this,b)}this.labelContainer=a(this.settings.errorLabelContainer),this.errorContext=this.labelContainer.length&&this.labelContainer||a(this.currentForm),this.containers=a(this.settings.errorContainer).add(this.settings.errorLabelContainer),this.submitted={},this.valueCache={},this.pendingRequest=0,this.pending={},this.invalid={},this.reset();var c,d=this.groups={};a.each(this.settings.groups,function(b,c){"string"==typeof c&&(c=c.split(/\s/)),a.each(c,function(a,c){d[c]=b})}),c=this.settings.rules,a.each(c,function(b,d){c[b]=a.validator.normalizeRule(d)}),a(this.currentForm).on("focusin.validate focusout.validate keyup.validate",":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], [type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], [type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], [type='radio'], [type='checkbox']",b).on("click.validate","select, option, [type='radio'], [type='checkbox']",b),this.settings.invalidHandler&&a(this.currentForm).on("invalid-form.validate",this.settings.invalidHandler),a(this.currentForm).find("[required], [data-rule-required], .required").attr("aria-required","true")},form:function(){return this.checkForm(),a.extend(this.submitted,this.errorMap),this.invalid=a.extend({},this.errorMap),this.valid()||a(this.currentForm).triggerHandler("invalid-form",[this]),this.showErrors(),this.valid()},checkForm:function(){this.prepareForm();for(var a=0,b=this.currentElements=this.elements();b[a];a++)this.check(b[a]);return this.valid()},element:function(b){var c=this.clean(b),d=this.validationTargetFor(c),e=!0;return this.lastElement=d,void 0===d?delete this.invalid[c.name]:(this.prepareElement(d),this.currentElements=a(d),e=this.check(d)!==!1,e?delete this.invalid[d.name]:this.invalid[d.name]=!0),a(b).attr("aria-invalid",!e),this.numberOfInvalids()||(this.toHide=this.toHide.add(this.containers)),this.showErrors(),e},showErrors:function(b){if(b){a.extend(this.errorMap,b),this.errorList=[];for(var c in b)this.errorList.push({message:b[c],element:this.findByName(c)[0]});this.successList=a.grep(this.successList,function(a){return!(a.name in b)})}this.settings.showErrors?this.settings.showErrors.call(this,this.errorMap,this.errorList):this.defaultShowErrors()},resetForm:function(){a.fn.resetForm&&a(this.currentForm).resetForm(),this.submitted={},this.lastElement=null,this.prepareForm(),this.hideErrors();var b,c=this.elements().removeData("previousValue").removeAttr("aria-invalid");if(this.settings.unhighlight)for(b=0;c[b];b++)this.settings.unhighlight.call(this,c[b],this.settings.errorClass,"");else c.removeClass(this.settings.errorClass)},numberOfInvalids:function(){return this.objectLength(this.invalid)},objectLength:function(a){var b,c=0;for(b in a)c++;return c},hideErrors:function(){this.hideThese(this.toHide)},hideThese:function(a){a.not(this.containers).text(""),this.addWrapper(a).hide()},valid:function(){return 0===this.size()},size:function(){return this.errorList.length},focusInvalid:function(){if(this.settings.focusInvalid)try{a(this.findLastActive()||this.errorList.length&&this.errorList[0].element||[]).filter(":visible").focus().trigger("focusin")}catch(b){}},findLastActive:function(){var b=this.lastActive;return b&&1===a.grep(this.errorList,function(a){return a.element.name===b.name}).length&&b},elements:function(){var b=this,c={};return a(this.currentForm).find("input, select, textarea").not(":submit, :reset, :image, :disabled").not(this.settings.ignore).filter(function(){return!this.name&&b.settings.debug&&window.console&&console.error("%o has no name assigned",this),this.name in c||!b.objectLength(a(this).rules())?!1:(c[this.name]=!0,!0)})},clean:function(b){return a(b)[0]},errors:function(){var b=this.settings.errorClass.split(" ").join(".");return a(this.settings.errorElement+"."+b,this.errorContext)},reset:function(){this.successList=[],this.errorList=[],this.errorMap={},this.toShow=a([]),this.toHide=a([]),this.currentElements=a([])},prepareForm:function(){this.reset(),this.toHide=this.errors().add(this.containers)},prepareElement:function(a){this.reset(),this.toHide=this.errorsFor(a)},elementValue:function(b){var c,d=a(b),e=b.type;return"radio"===e||"checkbox"===e?this.findByName(b.name).filter(":checked").val():"number"===e&&"undefined"!=typeof b.validity?b.validity.badInput?!1:d.val():(c=d.val(),"string"==typeof c?c.replace(/\r/g,""):c)},check:function(b){b=this.validationTargetFor(this.clean(b));var c,d,e,f=a(b).rules(),g=a.map(f,function(a,b){return b}).length,h=!1,i=this.elementValue(b);for(d in f){e={method:d,parameters:f[d]};try{if(c=a.validator.methods[d].call(this,i,b,e.parameters),"dependency-mismatch"===c&&1===g){h=!0;continue}if(h=!1,"pending"===c)return void(this.toHide=this.toHide.not(this.errorsFor(b)));if(!c)return this.formatAndAdd(b,e),!1}catch(j){throw this.settings.debug&&window.console&&console.log("Exception occurred when checking element "+b.id+", check the '"+e.method+"' method.",j),j instanceof TypeError&&(j.message+=".  Exception occurred when checking element "+b.id+", check the '"+e.method+"' method."),j}}if(!h)return this.objectLength(f)&&this.successList.push(b),!0},customDataMessage:function(b,c){return a(b).data("msg"+c.charAt(0).toUpperCase()+c.substring(1).toLowerCase())||a(b).data("msg")},customMessage:function(a,b){var c=this.settings.messages[a];return c&&(c.constructor===String?c:c[b])},findDefined:function(){for(var a=0;a<arguments.length;a++)if(void 0!==arguments[a])return arguments[a];return void 0},defaultMessage:function(b,c){return this.findDefined(this.customMessage(b.name,c),this.customDataMessage(b,c),!this.settings.ignoreTitle&&b.title||void 0,a.validator.messages[c],"<strong>Warning: No message defined for "+b.name+"</strong>")},formatAndAdd:function(b,c){var d=this.defaultMessage(b,c.method),e=/\$?\{(\d+)\}/g;"function"==typeof d?d=d.call(this,c.parameters,b):e.test(d)&&(d=a.validator.format(d.replace(e,"{$1}"),c.parameters)),this.errorList.push({message:d,element:b,method:c.method}),this.errorMap[b.name]=d,this.submitted[b.name]=d},addWrapper:function(a){return this.settings.wrapper&&(a=a.add(a.parent(this.settings.wrapper))),a},defaultShowErrors:function(){var a,b,c;for(a=0;this.errorList[a];a++)c=this.errorList[a],this.settings.highlight&&this.settings.highlight.call(this,c.element,this.settings.errorClass,this.settings.validClass),this.showLabel(c.element,c.message);if(this.errorList.length&&(this.toShow=this.toShow.add(this.containers)),this.settings.success)for(a=0;this.successList[a];a++)this.showLabel(this.successList[a]);if(this.settings.unhighlight)for(a=0,b=this.validElements();b[a];a++)this.settings.unhighlight.call(this,b[a],this.settings.errorClass,this.settings.validClass);this.toHide=this.toHide.not(this.toShow),this.hideErrors(),this.addWrapper(this.toShow).show()},validElements:function(){return this.currentElements.not(this.invalidElements())},invalidElements:function(){return a(this.errorList).map(function(){return this.element})},showLabel:function(b,c){var d,e,f,g=this.errorsFor(b),h=this.idOrName(b),i=a(b).attr("aria-describedby");g.length?(g.removeClass(this.settings.validClass).addClass(this.settings.errorClass),g.html(c)):(g=a("<"+this.settings.errorElement+">").attr("id",h+"-error").addClass(this.settings.errorClass).html(c||""),d=g,this.settings.wrapper&&(d=g.hide().show().wrap("<"+this.settings.wrapper+"/>").parent()),this.labelContainer.length?this.labelContainer.append(d):this.settings.errorPlacement?this.settings.errorPlacement(d,a(b)):d.insertAfter(b),g.is("label")?g.attr("for",h):0===g.parents("label[for='"+h+"']").length&&(f=g.attr("id").replace(/(:|\.|\[|\]|\$)/g,"\\$1"),i?i.match(new RegExp("\\b"+f+"\\b"))||(i+=" "+f):i=f,a(b).attr("aria-describedby",i),e=this.groups[b.name],e&&a.each(this.groups,function(b,c){c===e&&a("[name='"+b+"']",this.currentForm).attr("aria-describedby",g.attr("id"))}))),!c&&this.settings.success&&(g.text(""),"string"==typeof this.settings.success?g.addClass(this.settings.success):this.settings.success(g,b)),this.toShow=this.toShow.add(g)},errorsFor:function(b){var c=this.idOrName(b),d=a(b).attr("aria-describedby"),e="label[for='"+c+"'], label[for='"+c+"'] *";return d&&(e=e+", #"+d.replace(/\s+/g,", #")),this.errors().filter(e)},idOrName:function(a){return this.groups[a.name]||(this.checkable(a)?a.name:a.id||a.name)},validationTargetFor:function(b){return this.checkable(b)&&(b=this.findByName(b.name)),a(b).not(this.settings.ignore)[0]},checkable:function(a){return/radio|checkbox/i.test(a.type)},findByName:function(b){return a(this.currentForm).find("[name='"+b+"']")},getLength:function(b,c){switch(c.nodeName.toLowerCase()){case"select":return a("option:selected",c).length;case"input":if(this.checkable(c))return this.findByName(c.name).filter(":checked").length}return b.length},depend:function(a,b){return this.dependTypes[typeof a]?this.dependTypes[typeof a](a,b):!0},dependTypes:{"boolean":function(a){return a},string:function(b,c){return!!a(b,c.form).length},"function":function(a,b){return a(b)}},optional:function(b){var c=this.elementValue(b);return!a.validator.methods.required.call(this,c,b)&&"dependency-mismatch"},startRequest:function(a){this.pending[a.name]||(this.pendingRequest++,this.pending[a.name]=!0)},stopRequest:function(b,c){this.pendingRequest--,this.pendingRequest<0&&(this.pendingRequest=0),delete this.pending[b.name],c&&0===this.pendingRequest&&this.formSubmitted&&this.form()?(a(this.currentForm).submit(),this.formSubmitted=!1):!c&&0===this.pendingRequest&&this.formSubmitted&&(a(this.currentForm).triggerHandler("invalid-form",[this]),this.formSubmitted=!1)},previousValue:function(b){return a.data(b,"previousValue")||a.data(b,"previousValue",{old:null,valid:!0,message:this.defaultMessage(b,"remote")})},destroy:function(){this.resetForm(),a(this.currentForm).off(".validate").removeData("validator")}},classRuleSettings:{required:{required:!0},email:{email:!0},url:{url:!0},date:{date:!0},dateISO:{dateISO:!0},number:{number:!0},digits:{digits:!0},creditcard:{creditcard:!0}},addClassRules:function(b,c){b.constructor===String?this.classRuleSettings[b]=c:a.extend(this.classRuleSettings,b)},classRules:function(b){var c={},d=a(b).attr("class");return d&&a.each(d.split(" "),function(){this in a.validator.classRuleSettings&&a.extend(c,a.validator.classRuleSettings[this])}),c},normalizeAttributeRule:function(a,b,c,d){/min|max/.test(c)&&(null===b||/number|range|text/.test(b))&&(d=Number(d),isNaN(d)&&(d=void 0)),d||0===d?a[c]=d:b===c&&"range"!==b&&(a[c]=!0)},attributeRules:function(b){var c,d,e={},f=a(b),g=b.getAttribute("type");for(c in a.validator.methods)"required"===c?(d=b.getAttribute(c),""===d&&(d=!0),d=!!d):d=f.attr(c),this.normalizeAttributeRule(e,g,c,d);return e.maxlength&&/-1|2147483647|524288/.test(e.maxlength)&&delete e.maxlength,e},dataRules:function(b){var c,d,e={},f=a(b),g=b.getAttribute("type");for(c in a.validator.methods)d=f.data("rule"+c.charAt(0).toUpperCase()+c.substring(1).toLowerCase()),this.normalizeAttributeRule(e,g,c,d);return e},staticRules:function(b){var c={},d=a.data(b.form,"validator");return d.settings.rules&&(c=a.validator.normalizeRule(d.settings.rules[b.name])||{}),c},normalizeRules:function(b,c){return a.each(b,function(d,e){if(e===!1)return void delete b[d];if(e.param||e.depends){var f=!0;switch(typeof e.depends){case"string":f=!!a(e.depends,c.form).length;break;case"function":f=e.depends.call(c,c)}f?b[d]=void 0!==e.param?e.param:!0:delete b[d]}}),a.each(b,function(d,e){b[d]=a.isFunction(e)?e(c):e}),a.each(["minlength","maxlength"],function(){b[this]&&(b[this]=Number(b[this]))}),a.each(["rangelength","range"],function(){var c;b[this]&&(a.isArray(b[this])?b[this]=[Number(b[this][0]),Number(b[this][1])]:"string"==typeof b[this]&&(c=b[this].replace(/[\[\]]/g,"").split(/[\s,]+/),b[this]=[Number(c[0]),Number(c[1])]))}),a.validator.autoCreateRanges&&(null!=b.min&&null!=b.max&&(b.range=[b.min,b.max],delete b.min,delete b.max),null!=b.minlength&&null!=b.maxlength&&(b.rangelength=[b.minlength,b.maxlength],delete b.minlength,delete b.maxlength)),b},normalizeRule:function(b){if("string"==typeof b){var c={};a.each(b.split(/\s/),function(){c[this]=!0}),b=c}return b},addMethod:function(b,c,d){a.validator.methods[b]=c,a.validator.messages[b]=void 0!==d?d:a.validator.messages[b],c.length<3&&a.validator.addClassRules(b,a.validator.normalizeRule(b))},methods:{required:function(b,c,d){if(!this.depend(d,c))return"dependency-mismatch";if("select"===c.nodeName.toLowerCase()){var e=a(c).val();return e&&e.length>0}return this.checkable(c)?this.getLength(b,c)>0:b.length>0},email:function(a,b){return this.optional(b)||/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(a)},url:function(a,b){return this.optional(b)||/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(a)},date:function(a,b){return this.optional(b)||!/Invalid|NaN/.test(new Date(a).toString())},dateISO:function(a,b){return this.optional(b)||/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(a)},number:function(a,b){return this.optional(b)||/^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(a)},digits:function(a,b){return this.optional(b)||/^\d+$/.test(a)},creditcard:function(a,b){if(this.optional(b))return"dependency-mismatch";if(/[^0-9 \-]+/.test(a))return!1;var c,d,e=0,f=0,g=!1;if(a=a.replace(/\D/g,""),a.length<13||a.length>19)return!1;for(c=a.length-1;c>=0;c--)d=a.charAt(c),f=parseInt(d,10),g&&(f*=2)>9&&(f-=9),e+=f,g=!g;return e%10===0},minlength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||e>=d},maxlength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||d>=e},rangelength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||e>=d[0]&&e<=d[1]},min:function(a,b,c){return this.optional(b)||a>=c},max:function(a,b,c){return this.optional(b)||c>=a},range:function(a,b,c){return this.optional(b)||a>=c[0]&&a<=c[1]},equalTo:function(b,c,d){var e=a(d);return this.settings.onfocusout&&e.off(".validate-equalTo").on("blur.validate-equalTo",function(){a(c).valid()}),b===e.val()},remote:function(b,c,d){if(this.optional(c))return"dependency-mismatch";var e,f,g=this.previousValue(c);return this.settings.messages[c.name]||(this.settings.messages[c.name]={}),g.originalMessage=this.settings.messages[c.name].remote,this.settings.messages[c.name].remote=g.message,d="string"==typeof d&&{url:d}||d,g.old===b?g.valid:(g.old=b,e=this,this.startRequest(c),f={},f[c.name]=b,a.ajax(a.extend(!0,{mode:"abort",port:"validate"+c.name,dataType:"json",data:f,context:e.currentForm,success:function(d){var f,h,i,j=d===!0||"true"===d;e.settings.messages[c.name].remote=g.originalMessage,j?(i=e.formSubmitted,e.prepareElement(c),e.formSubmitted=i,e.successList.push(c),delete e.invalid[c.name],e.showErrors()):(f={},h=d||e.defaultMessage(c,"remote"),f[c.name]=g.message=a.isFunction(h)?h(b):h,e.invalid[c.name]=!0,e.showErrors(f)),g.valid=j,e.stopRequest(c,j)}},d)),"pending")}}});var b,c={};a.ajaxPrefilter?a.ajaxPrefilter(function(a,b,d){var e=a.port;"abort"===a.mode&&(c[e]&&c[e].abort(),c[e]=d)}):(b=a.ajax,a.ajax=function(d){var e=("mode"in d?d:a.ajaxSettings).mode,f=("port"in d?d:a.ajaxSettings).port;return"abort"===e?(c[f]&&c[f].abort(),c[f]=b.apply(this,arguments),c[f]):b.apply(this,arguments)})});
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$.validator.addMethod("compareTeamCountToMemberCount", function(value, element) {
+					var memberCount = $("input[type='checkbox'][name='member[]']:checked").length;
+					var teamCount = $("#teamCount").val();
+					return this.optional(element) || memberCount >= teamCount;
+				});
+
+				$("#teamAllocatorForm").validate({
+					rules: {
+						"member[]": {
+							required: true
+						},
+						teamCount: {
+							required: true,
+							compareTeamCountToMemberCount: true
+						}
+					},
+					messages: {
+						"member[]": {
+							required: "メンバーを選択してください。"
+						},
+						teamCount: {
+							required: "チーム数を入力してください。",
+							compareTeamCountToMemberCount: "チーム数はメンバー数以下で入力してください。"
+						}
+					},
+					errorPlacement: function (error, element) {
+						if (element.attr("name") == "member[]" ) {
+							error.appendTo($("#memberCount_error"));
+						} else {
+							error.appendTo($("#" + $(element).attr("id") + "_error"));
+						}
+					}
+				});
+
+				$("#selectAllButton").click(function() {
+					$("input[type='checkbox'][name='member[]']").prop("checked", true).checkboxradio("refresh");
+					$("h4[name='memberCount']").html("メンバー " + $("input[type='checkbox'][name='member[]']:checked").length + "人");
+				});
+
+				$("#releaseAllButton").click(function() {
+					$("input[type='checkbox'][name='member[]']").prop("checked", false).checkboxradio("refresh");
+					$("h4[name='memberCount']").html("メンバー " + $("input[type='checkbox'][name='member[]']:checked").length + "人");
+				});
+
+				$("input[type='checkbox'][name='member[]']").click(function() {
+					$("h4[name='memberCount']").html("メンバー " + $("input[type='checkbox'][name='member[]']:checked").length + "人");
+				});
+
+				$("#createTeamButton").click(function() {
+					if ($("#teamAllocatorForm").valid()) {
+						createTeam();
+						$(this).prop("href", "#result");
+					} else {
+						$(this).prop("href", "#");
+					}
+				});
+
+				$("#reCreateTeamButton").click(function() {
+					createTeam();
+				});
+			});
+
+			function createTeam() {
+				var checked = $("input[type='checkbox'][name='member[]']:checked");
+				var members = [];
+
+				for (var i = 0; i < checked.length; i++) {
+					var member = JSON.parse(checked.eq(i).val());
+					member["ORDER"] = Math.random() * checked.length;
+					members.push(member);
+				}
+
+				members.sort(function(a, b) {
+					var result;
+
+					if (a["GENDER_CODE"] < b["GENDER_CODE"]) {
+						result = -1;
+					} else if (a["GENDER_CODE"] > b["GENDER_CODE"]) {
+						result = 1;
+					} else if (a["ORDER"] < b["ORDER"]) {
+						result = -1;
+					} else if (a["ORDER"] > b["ORDER"]) {
+						result = 1;
+					} else {
+						result = 0;
+					}
+
+					return result;
+				});
+
+				var teams = [];
+
+				for (var i = 1; i <= $("#teamCount").val(); i++) {
+					var team = {
+						name: "チーム" + i,
+						members: []
+					};
+					teams.push(team);
+				}
+
+				var teamNum = 0;
+
+				for (var i = 0; i < members.length; i++) {
+					teams[teamNum]["members"].push(members[i]);
+
+					if (teamNum < teams.length - 1) {
+						teamNum++;
+					} else {
+						teamNum = 0;
+					}
+				}
+
+				var content = "";
+
+				for (var i = 0; i < teams.length; i++) {
+					content += "<li data-role=\"list-divider\">" + teams[i]["name"] + "</li>";
+
+					for (var j = 0; j < teams[i]["members"].length; j++) {
+						content += "<li>" + teams[i]["members"][j]["MEMBER_NAME"] + "</li>";
+					}
+				}
+
+				$("#teams").html(content).listview().listview("refresh");
+			}
+		</script>
 	</head>
 	<body>
-		サンプル
+		<div id="main" data-role="page" data-theme="b">
+			<div data-role="header" data-position="fixed">
+				<h1>チーム分け</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<form id="teamAllocatorForm" name="teamAllocatorForm" method="post" action=".">
+					<div class="ui-grid-b">
+						<div class="ui-block-a">
+							<h4 name="memberCount">メンバー 0人</h4>
+						</div>
+						<div class="ui-block-b">
+							<a id="selectAllButton" href="#" class="ui-btn ui-btn-inline ui-shadow ui-btn-icon-left ui-icon-check ui-corner-all">全選択</a>
+						</div>
+						<div class="ui-block-c">
+							<a id="releaseAllButton" href="#" class="ui-btn ui-btn-inline ui-shadow ui-btn-icon-left ui-icon-delete ui-corner-all">全解除</a>
+						</div>
+					</div>
+					<div class="ui-field-contain">
+						<fieldset data-role="controlgroup" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+							<div class="ui-controlgroup-controls ">
+								<div class="ui-checkbox">
+									<label for="member_1" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">ゆうこりん</label><input type="checkbox" id="member_1" name="member[]" value="{&quot;ROW&quot;:2,&quot;ID&quot;:1,&quot;MEMBER_NAME&quot;:&quot;ゆうこりん&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_2" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">いが</label><input type="checkbox" id="member_2" name="member[]" value="{&quot;ROW&quot;:3,&quot;ID&quot;:2,&quot;MEMBER_NAME&quot;:&quot;いが&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_3" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">ゆー</label><input type="checkbox" id="member_3" name="member[]" value="{&quot;ROW&quot;:4,&quot;ID&quot;:3,&quot;MEMBER_NAME&quot;:&quot;ゆー&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_4" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">つね</label><input type="checkbox" id="member_4" name="member[]" value="{&quot;ROW&quot;:5,&quot;ID&quot;:4,&quot;MEMBER_NAME&quot;:&quot;つね&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_5" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">もり</label><input type="checkbox" id="member_5" name="member[]" value="{&quot;ROW&quot;:6,&quot;ID&quot;:5,&quot;MEMBER_NAME&quot;:&quot;もり&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_6" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">そが</label><input type="checkbox" id="member_6" name="member[]" value="{&quot;ROW&quot;:7,&quot;ID&quot;:6,&quot;MEMBER_NAME&quot;:&quot;そが&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_7" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">さき</label><input type="checkbox" id="member_7" name="member[]" value="{&quot;ROW&quot;:8,&quot;ID&quot;:7,&quot;MEMBER_NAME&quot;:&quot;さき&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_8" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">こか</label><input type="checkbox" id="member_8" name="member[]" value="{&quot;ROW&quot;:9,&quot;ID&quot;:8,&quot;MEMBER_NAME&quot;:&quot;こか&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_9" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">ひら</label><input type="checkbox" id="member_9" name="member[]" value="{&quot;ROW&quot;:10,&quot;ID&quot;:9,&quot;MEMBER_NAME&quot;:&quot;ひら&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_10" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">なみっきー</label><input type="checkbox" id="member_10" name="member[]" value="{&quot;ROW&quot;:11,&quot;ID&quot;:10,&quot;MEMBER_NAME&quot;:&quot;なみっきー&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_11" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">あご</label><input type="checkbox" id="member_11" name="member[]" value="{&quot;ROW&quot;:12,&quot;ID&quot;:11,&quot;MEMBER_NAME&quot;:&quot;あご&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_12" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">いけやす</label><input type="checkbox" id="member_12" name="member[]" value="{&quot;ROW&quot;:13,&quot;ID&quot;:12,&quot;MEMBER_NAME&quot;:&quot;いけやす&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_13" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">けんた</label><input type="checkbox" id="member_13" name="member[]" value="{&quot;ROW&quot;:14,&quot;ID&quot;:13,&quot;MEMBER_NAME&quot;:&quot;けんた&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_14" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">つや</label><input type="checkbox" id="member_14" name="member[]" value="{&quot;ROW&quot;:15,&quot;ID&quot;:14,&quot;MEMBER_NAME&quot;:&quot;つや&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_15" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">のん</label><input type="checkbox" id="member_15" name="member[]" value="{&quot;ROW&quot;:16,&quot;ID&quot;:15,&quot;MEMBER_NAME&quot;:&quot;のん&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_16" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">まっきー</label><input type="checkbox" id="member_16" name="member[]" value="{&quot;ROW&quot;:17,&quot;ID&quot;:16,&quot;MEMBER_NAME&quot;:&quot;まっきー&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_17" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">ダイトゥ</label><input type="checkbox" id="member_17" name="member[]" value="{&quot;ROW&quot;:18,&quot;ID&quot;:17,&quot;MEMBER_NAME&quot;:&quot;ダイトゥ&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_18" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">あべ</label><input type="checkbox" id="member_18" name="member[]" value="{&quot;ROW&quot;:19,&quot;ID&quot;:18,&quot;MEMBER_NAME&quot;:&quot;あべ&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_19" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">まっつ</label><input type="checkbox" id="member_19" name="member[]" value="{&quot;ROW&quot;:20,&quot;ID&quot;:19,&quot;MEMBER_NAME&quot;:&quot;まっつ&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_20" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">やまと</label><input type="checkbox" id="member_20" name="member[]" value="{&quot;ROW&quot;:21,&quot;ID&quot;:20,&quot;MEMBER_NAME&quot;:&quot;やまと&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_21" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">こむろ</label><input type="checkbox" id="member_21" name="member[]" value="{&quot;ROW&quot;:22,&quot;ID&quot;:21,&quot;MEMBER_NAME&quot;:&quot;こむろ&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_22" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">きょん</label><input type="checkbox" id="member_22" name="member[]" value="{&quot;ROW&quot;:23,&quot;ID&quot;:22,&quot;MEMBER_NAME&quot;:&quot;きょん&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_23" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">とし</label><input type="checkbox" id="member_23" name="member[]" value="{&quot;ROW&quot;:24,&quot;ID&quot;:23,&quot;MEMBER_NAME&quot;:&quot;とし&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_24" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">みや</label><input type="checkbox" id="member_24" name="member[]" value="{&quot;ROW&quot;:25,&quot;ID&quot;:24,&quot;MEMBER_NAME&quot;:&quot;みや&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_25" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">やす</label><input type="checkbox" id="member_25" name="member[]" value="{&quot;ROW&quot;:26,&quot;ID&quot;:25,&quot;MEMBER_NAME&quot;:&quot;やす&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_26" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">さと</label><input type="checkbox" id="member_26" name="member[]" value="{&quot;ROW&quot;:27,&quot;ID&quot;:26,&quot;MEMBER_NAME&quot;:&quot;さと&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_27" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">まゆ</label><input type="checkbox" id="member_27" name="member[]" value="{&quot;ROW&quot;:28,&quot;ID&quot;:27,&quot;MEMBER_NAME&quot;:&quot;まゆ&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_28" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">のり</label><input type="checkbox" id="member_28" name="member[]" value="{&quot;ROW&quot;:29,&quot;ID&quot;:28,&quot;MEMBER_NAME&quot;:&quot;のり&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_29" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">うぉん</label><input type="checkbox" id="member_29" name="member[]" value="{&quot;ROW&quot;:30,&quot;ID&quot;:29,&quot;MEMBER_NAME&quot;:&quot;うぉん&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_91" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">男性ゲスト1</label><input type="checkbox" id="member_91" name="member[]" value="{&quot;ROW&quot;:92,&quot;ID&quot;:91,&quot;MEMBER_NAME&quot;:&quot;男性ゲスト1&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_92" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">男性ゲスト2</label><input type="checkbox" id="member_92" name="member[]" value="{&quot;ROW&quot;:93,&quot;ID&quot;:92,&quot;MEMBER_NAME&quot;:&quot;男性ゲスト2&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_93" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">男性ゲスト3</label><input type="checkbox" id="member_93" name="member[]" value="{&quot;ROW&quot;:94,&quot;ID&quot;:93,&quot;MEMBER_NAME&quot;:&quot;男性ゲスト3&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_94" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">男性ゲスト4</label><input type="checkbox" id="member_94" name="member[]" value="{&quot;ROW&quot;:95,&quot;ID&quot;:94,&quot;MEMBER_NAME&quot;:&quot;男性ゲスト4&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_95" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">男性ゲスト5</label><input type="checkbox" id="member_95" name="member[]" value="{&quot;ROW&quot;:96,&quot;ID&quot;:95,&quot;MEMBER_NAME&quot;:&quot;男性ゲスト5&quot;,&quot;GENDER_CODE&quot;:1,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_96" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">女性ゲスト1</label><input type="checkbox" id="member_96" name="member[]" value="{&quot;ROW&quot;:97,&quot;ID&quot;:96,&quot;MEMBER_NAME&quot;:&quot;女性ゲスト1&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_97" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">女性ゲスト2</label><input type="checkbox" id="member_97" name="member[]" value="{&quot;ROW&quot;:98,&quot;ID&quot;:97,&quot;MEMBER_NAME&quot;:&quot;女性ゲスト2&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_98" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">女性ゲスト3</label><input type="checkbox" id="member_98" name="member[]" value="{&quot;ROW&quot;:99,&quot;ID&quot;:98,&quot;MEMBER_NAME&quot;:&quot;女性ゲスト3&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_99" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">女性ゲスト4</label><input type="checkbox" id="member_99" name="member[]" value="{&quot;ROW&quot;:100,&quot;ID&quot;:99,&quot;MEMBER_NAME&quot;:&quot;女性ゲスト4&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+								<div class="ui-checkbox">
+									<label for="member_100" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off ui-first-child">女性ゲスト5</label><input type="checkbox" id="member_100" name="member[]" value="{&quot;ROW&quot;:101,&quot;ID&quot;:100,&quot;MEMBER_NAME&quot;:&quot;女性ゲスト5&quot;,&quot;GENDER_CODE&quot;:2,&quot;CHECKED&quot;:false}">
+								</div>
+							</div>
+						</fieldset>
+						<label id="memberCount_error" class="label-error"></label>
+					</div> 
+					<div class="ui-grid-b">
+						<div class="ui-block-a">
+							<h4 name="memberCount">メンバー 0人</h4>
+						</div>
+						<div class="ui-block-b">
+							&nbsp;
+						</div>
+						<div class="ui-block-c">
+							&nbsp;
+						</div>
+					</div>
+					<div class="ui-field-contain">
+						<select id="teamCount" name="teamCount">
+							<option value="">チーム数を選択してください。</option>
+							<option value="2">2チーム</option>
+							<option value="3">3チーム</option>
+							<option value="4">4チーム</option>
+							<option value="5">5チーム</option>
+							<option value="6">6チーム</option>
+						</select>
+						<label id="teamCount_error" class="label-error"></label>
+					</div>
+					<div class="ui-field-contain">
+						<a id="createTeamButton" href="#result" class="ui-btn ui-shadow ui-btn-icon-left ui-icon-edit ui-corner-all">チームを作成する</a>
+					</div>
+				</form>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+		<div id="result" data-role="page" data-theme="b">
+			<div data-role="header">
+				<a href="#main" class="ui-btn ui-corner-all ui-btn-icon-left ui-btn-icon-notext ui-icon-back">戻る</a>
+				<h1>結果</h1>
+			</div>
+			<div data-role="main" class="ui-content">
+				<ul id="teams" data-role="listview" data-inset="true"></ul>
+				<a id="reCreateTeamButton" href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-edit">作成し直す</a>
+			</div>
+		</div>
 	</body>
 </html>

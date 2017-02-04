@@ -126,11 +126,7 @@
 					colorSoccer = "color: #ff6347;";
 				}
 
-				$("#balanceNana").append(
-					$("<span></span>", {
-						"style": colorNana
-					}).html($f.formatCurrency(balanceNana, "JPY"))
-				);
+				$("#balanceNana").val($f.formatCurrency(balanceNana, "JPY")).attr("style", colorNana);
 
 				$("#balanceUranana").append(
 					$("<span></span>", {

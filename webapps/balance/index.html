@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-		<title>‰ïŒv | FC NaNA</title>
+		<title>ä¼šè¨ˆ | FC NaNA</title>
 		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 		<style type="text/css">
@@ -78,7 +78,7 @@
 				});
 
 				$("#registerButton").click(function() {
-					if (confirm("“o˜^‚µ‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚©H")) {
+					if (confirm("ç™»éŒ²ã—ã¾ã™ã€‚ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ")) {
 						$f.getJSONP("https://script.google.com/macros/s/AKfycbyqg7OOoe2poYRQZHMJ4QJa7BLZByhy4hAPCKFc3dyX1B6oI20/exec", {
 							"function": "registerAmount",
 							"date": $("#year").val() + "/" + $("#month").val(),
@@ -146,11 +146,11 @@
 				for (var i in data["data"]["statement"]) {
 					var amount = data["data"]["statement"][i]["AMOUNT"];
 					var style = "color: #ffffff;";
-					var activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">“ü</div>";
+					var activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">å…¥</div>";
 
 					if (amount < 0) {
 						style = "color: #ff6347;";
-						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">o</div>";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">å‡º</div>";
 					}
 
 					$("<li></li>").append(
@@ -166,7 +166,7 @@
 					).append(
 						$("<p></p>", {
 							"class": "ui-li-aside"
-						}).html($f.formatDate(new Date(data["data"]["statement"][i]["DATE"]), "yyyy”NMMŒ•ª"))
+						}).html($f.formatDate(new Date(data["data"]["statement"][i]["DATE"]), "yyyyå¹´MMæœˆåˆ†"))
 					).appendTo($("#statement"));
 				}
 
@@ -179,9 +179,9 @@
 				var nextYear = new Date(thisYear.getFullYear() + 1, thisYear.getMonth());
 
 				var years = {}
-				years[$f.formatDate(lastYear, "yyyy”N")] = $f.formatDate(lastYear, "yyyy");
-				years[$f.formatDate(thisYear, "yyyy”N")] = $f.formatDate(thisYear, "yyyy");
-				years[$f.formatDate(nextYear, "yyyy”N")] = $f.formatDate(nextYear, "yyyy");
+				years[$f.formatDate(lastYear, "yyyyå¹´")] = $f.formatDate(lastYear, "yyyy");
+				years[$f.formatDate(thisYear, "yyyyå¹´")] = $f.formatDate(thisYear, "yyyy");
+				years[$f.formatDate(nextYear, "yyyyå¹´")] = $f.formatDate(nextYear, "yyyy");
 
 				for (var key in years) {
 					$("#year").append($("<option></option>", {
@@ -214,15 +214,15 @@
 	<body>
 		<div id="page-balance" data-role="page" data-theme="b">
 			<div data-role="header">
-				<h1>c‚Æ‰ï</h1>
+				<h1>æ®‹é«˜ç…§ä¼š</h1>
 				<a href="#page-registration" class="ui-btn ui-btn-icon-notext ui-icon-plus ui-corner-all ui-btn-right"></a>
 			</div>
 			<div role="main" class="ui-content">
 				<div data-role="tabs">
 					<div data-role="navbar" data-iconsop="left">
 						<ul>
-							<li><a href="#tab-balance" class="ui-btn-active">Œ»İc‚</a></li>
-							<li><a href="#tab-activity">“üo‹à–¾×</a></li>
+							<li><a href="#tab-balance" class="ui-btn-active">ç¾åœ¨æ®‹é«˜</a></li>
+							<li><a href="#tab-activity">å…¥å‡ºé‡‘æ˜ç´°</a></li>
 						</ul>
 					</div>
 					<div id="tab-balance">
@@ -234,13 +234,13 @@
 								</div>
 							</div>
 							<div class="ui-field-contain">
-								<label>ƒEƒ‰ƒiƒi</label>
+								<label>ã‚¦ãƒ©ãƒŠãƒŠ</label>
 								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
 									<span id="balanceUranana" style="font-weight: bold;"></span>
 								</div>
 							</div>
 							<div class="ui-field-contain">
-								<label>ƒTƒbƒJ[•”</label>
+								<label>ã‚µãƒƒã‚«ãƒ¼éƒ¨</label>
 								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
 									<span id="balanceSoccer" style="font-weight: bold;"></span>
 								</div>
@@ -264,7 +264,7 @@
 		<div id="page-registration" data-role="page" data-theme="b">
 			<div data-role="header">
 				<a href="#page-balance" class="ui-btn ui-btn-icon-notext ui-icon-back ui-corner-all ui-btn-left"></a>
-				<h1>“üo‹à“o˜^</h1>
+				<h1>å…¥å‡ºé‡‘ç™»éŒ²</h1>
 			</div>
 			<div role="main" class="ui-content">
 				<form id="form" name="form" action="#" method="post" data-ajax="false">
@@ -273,17 +273,17 @@
 							<input type="radio" id="nana" name="category" value="NANA" checked="checked">
 							<label for="nana">NaNA</label>
 							<input type="radio" id="uranana" name="category" value="URANANA">
-							<label for="uranana">ƒEƒ‰ƒiƒi</label>
+							<label for="uranana">ã‚¦ãƒ©ãƒŠãƒŠ</label>
 							<input  type="radio"id="soccer" name="category" value="SOCCER">
-							<label for="soccer">ƒTƒbƒJ[•”</label>
+							<label for="soccer">ã‚µãƒƒã‚«ãƒ¼éƒ¨</label>
 						</fieldset>
 					</div>
 					<div class="ui-field-contain" style="text-align: center;">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<input type="radio" id="deposits" name="activity" value="1" checked="checked">
-							<label for="deposits" style="width: 100px; text-align: center;">“ü‹à</label>
+							<label for="deposits" style="width: 100px; text-align: center;">å…¥é‡‘</label>
 							<input  type="radio"id="withdrawals" name="activity" value="-1">
-							<label for="withdrawals" style="width: 100px; text-align: center;">o‹à</label>
+							<label for="withdrawals" style="width: 100px; text-align: center;">å‡ºé‡‘</label>
 						</fieldset>
 					</div>
 					<div class="ui-field-contain">
@@ -293,24 +293,24 @@
 							</div>
 							<div class="ui-block-b">
 								<select id="month" name="month">
-									<option value="01">1Œ•ª</option>
-									<option value="02">2Œ•ª</option>
-									<option value="03">3Œ•ª</option>
-									<option value="04">4Œ•ª</option>
-									<option value="05">5Œ•ª</option>
-									<option value="06">6Œ•ª</option>
-									<option value="07">7Œ•ª</option>
-									<option value="08">8Œ•ª</option>
-									<option value="09">9Œ•ª</option>
-									<option value="10">10Œ•ª</option>
-									<option value="11">11Œ•ª</option>
-									<option value="12">12Œ•ª</option>
+									<option value="01">1æœˆåˆ†</option>
+									<option value="02">2æœˆåˆ†</option>
+									<option value="03">3æœˆåˆ†</option>
+									<option value="04">4æœˆåˆ†</option>
+									<option value="05">5æœˆåˆ†</option>
+									<option value="06">6æœˆåˆ†</option>
+									<option value="07">7æœˆåˆ†</option>
+									<option value="08">8æœˆåˆ†</option>
+									<option value="09">9æœˆåˆ†</option>
+									<option value="10">10æœˆåˆ†</option>
+									<option value="11">11æœˆåˆ†</option>
+									<option value="12">12æœˆåˆ†</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="ui-field-contain">
-						<label for="amount">‹àŠz</label>
+						<label for="amount">é‡‘é¡</label>
 						<input type="text" id="amountDisplay" name="amountDisplay" style="text-align: right;" readonly="readonly">
 						<input type="hidden" id="amount" name="amount" value="0">
 						<div class="ui-grid-b">
@@ -348,16 +348,16 @@
 								<button id="number00Button" class="ui-btn ui-corner-all">00</button>
 							</div>
 							<div class="ui-block-c">
-								<button id="clearButton" class="ui-btn ui-corner-all">ƒNƒŠƒA</button>
+								<button id="clearButton" class="ui-btn ui-corner-all">ã‚¯ãƒªã‚¢</button>
 							</div>
 						</div>
 					</div>
 					<div class="ui-field-contain">
-						<label for="memo">ƒƒ‚</label>
+						<label for="memo">ãƒ¡ãƒ¢</label>
 						<textarea id="memo" name="memo"></textarea>
 					</div>
 					<div class="ui-field-contain">
-						<button id="registerButton" class="ui-btn ui-corner-all">“o˜^‚·‚é</button>
+						<button id="registerButton" class="ui-btn ui-corner-all">ç™»éŒ²ã™ã‚‹</button>
 					</div>
 				</form>
 			</div>

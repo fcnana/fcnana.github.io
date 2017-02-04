@@ -110,12 +110,12 @@
 				var balanceNana = data["data"]["balanceNana"][0]["AMOUNT"];
 				var balanceUranana = data["data"]["balanceUranana"][0]["AMOUNT"];
 				var balanceSoccer = data["data"]["balanceSoccer"][0]["AMOUNT"];
-				var colorNana = "color: #ffffff";
+				var colorNana = "#ffffff";
 				var colorUranana = "color: #ffffff";
 				var colorSoccer = "color: #ffffff";
 
 				if (balanceNana < 0) {
-					colorNana = "color: #ff6347;";
+					colorNana = "#ff6347;";
 				}
 
 				if (balanceUranana < 0) {
@@ -126,7 +126,7 @@
 					colorSoccer = "color: #ff6347;";
 				}
 
-				$("#balanceNana").val($f.formatCurrency(balanceNana, "JPY")).attr("style", colorNana);
+				$("#balanceNana").val($f.formatCurrency(balanceNana, "JPY")).css("color", colorNana);
 
 				$("#balanceUranana").append(
 					$("<span></span>", {

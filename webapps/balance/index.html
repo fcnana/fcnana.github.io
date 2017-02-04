@@ -111,34 +111,24 @@
 				var balanceUranana = data["data"]["balanceUranana"][0]["AMOUNT"];
 				var balanceSoccer = data["data"]["balanceSoccer"][0]["AMOUNT"];
 				var colorNana = "#ffffff";
-				var colorUranana = "color: #ffffff";
-				var colorSoccer = "color: #ffffff";
+				var colorUranana = "#ffffff";
+				var colorSoccer = "#ffffff";
 
 				if (balanceNana < 0) {
 					colorNana = "#ff6347;";
 				}
 
 				if (balanceUranana < 0) {
-					colorUranana = "color: #ff6347;";
+					colorUranana = "#ff6347;";
 				}
 
 				if (balanceSoccer < 0) {
-					colorSoccer = "color: #ff6347;";
+					colorSoccer = "#ff6347;";
 				}
 
 				$("#balanceNana").val($f.formatCurrency(balanceNana, "JPY")).css("color", colorNana);
-
-				$("#balanceUranana").append(
-					$("<span></span>", {
-						"style": colorUranana
-					}).html($f.formatCurrency(balanceUranana, "JPY"))
-				);
-
-				$("#balanceSoccer").append(
-					$("<span></span>", {
-						"style": colorSoccer
-					}).html($f.formatCurrency(balanceSoccer, "JPY"))
-				);
+				$("#balanceUranana").val($f.formatCurrency(balanceUranana, "JPY")).css("color", colorUranana);
+				$("#balanceSoccer").val($f.formatCurrency(balanceSoccer, "JPY")).css("color", colorSoccer);
 
 				for (var i in data["data"]["statement"]) {
 					var amount = data["data"]["statement"][i]["AMOUNT"];
@@ -229,16 +219,12 @@
 								<input type="text" id="balanceNana" name="balanceNana" style="text-align: right;" readonly="readonly">
 							</div>
 							<div class="ui-field-contain">
-								<label>ウラナナ</label>
-								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
-									<span id="balanceUranana" style="font-weight: bold;"></span>
-								</div>
+								<label for="balanceUranana">ウラナナ</label>
+								<input type="text" id="balanceUranana" name="balanceUranana" style="text-align: right;" readonly="readonly">
 							</div>
 							<div class="ui-field-contain">
-								<label>サッカー部</label>
-								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
-									<span id="balanceSoccer" style="font-weight: bold;"></span>
-								</div>
+								<label for="balanceSoccer">サッカー部</label>
+								<input type="text" id="balanceSoccer" name="balanceSoccer" style="text-align: right;" readonly="readonly">
 							</div>
 						</p>
 					</div>

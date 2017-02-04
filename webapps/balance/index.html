@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<title>会計 | FC NaNA</title>
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<style type="text/css">
+			span.required, label.error {
+				color: #f08080;
+			}
+		</style>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).on("mobileinit", function() {
+				$.mobile.loader.prototype.options.text = "waiting please.";
+				$.mobile.loader.prototype.options.textonly = false;
+				$.mobile.loader.prototype.options.textVisible = true;
+				$.mobile.loader.prototype.options.theme = "b";
+			});
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="//sites.google.com/site/fcnanalibrary/fcnana.min.js"></script>
+		<script>
+			$(function() {
+				$("#form").submit(function(event) {
+					event.preventDefault();
+				});
+
+				reset();
+
+				$("#number1Button").click(function() {
+					addNumber("1");
+				});
+
+				$("#number2Button").click(function() {
+					addNumber("2");
+				});
+
+				$("#number3Button").click(function() {
+					addNumber("3");
+				});
+
+				$("#number4Button").click(function() {
+					addNumber("4");
+				});
+
+				$("#number5Button").click(function() {
+					addNumber("5");
+				});
+
+				$("#number6Button").click(function() {
+					addNumber("6");
+				});
+
+				$("#number7Button").click(function() {
+					addNumber("7");
+				});
+
+				$("#number8Button").click(function() {
+					addNumber("8");
+				});
+
+				$("#number9Button").click(function() {
+					addNumber("9");
+				});
+
+				$("#number0Button").click(function() {
+					addNumber("0");
+				});
+
+				$("#number00Button").click(function() {
+					addNumber("00");
+				});
+
+				$("#clearButton").click(function() {
+					clear();
+				});
+
+				$("#registerButton").click(function() {
+					if (confirm("登録します。よろしいですか？")) {
+						$f.getJSONP("https://script.google.com/macros/s/AKfycbyqg7OOoe2poYRQZHMJ4QJa7BLZByhy4hAPCKFc3dyX1B6oI20/exec", {
+							"function": "registerAmount",
+							"date": $("#year").val() + "/" + $("#month").val(),
+							"category": $("[name='category']:checked").val(),
+							"amount": $("#amount").val() * $("[name='activity']:checked").val(),
+							"memo": $("#memo").val()
+						}, function(data) {
+							read(data);
+							$.mobile.changePage("#page-balance");
+							reset();
+						});
+					}
+				});
+
+				$f.getJSONP("https://script.google.com/macros/s/AKfycbyqg7OOoe2poYRQZHMJ4QJa7BLZByhy4hAPCKFc3dyX1B6oI20/exec", {
+					"function": "getData"
+				}, function(data) {
+					read(data);
+				});
+			});
+
+			function read(data) {
+				$("#balanceNana").empty();
+				$("#balanceUranana").empty();
+				$("#balanceSoccer").empty();
+				$("#statement").empty();
+
+				var balanceNana = data["data"]["balanceNana"][0]["AMOUNT"];
+				var balanceUranana = data["data"]["balanceUranana"][0]["AMOUNT"];
+				var balanceSoccer = data["data"]["balanceSoccer"][0]["AMOUNT"];
+				var colorNana = "color: #ffffff";
+				var colorUranana = "color: #ffffff";
+				var colorSoccer = "color: #ffffff";
+
+				if (balanceNana < 0) {
+					colorNana = "color: #ff6347;";
+				}
+
+				if (balanceUranana < 0) {
+					colorUranana = "color: #ff6347;";
+				}
+
+				if (balanceSoccer < 0) {
+					colorSoccer = "color: #ff6347;";
+				}
+
+				$("#balanceNana").append(
+					$("<span></span>", {
+						"style": colorNana
+					}).html($f.formatCurrency(balanceNana, "JPY"))
+				);
+
+				$("#balanceUranana").append(
+					$("<span></span>", {
+						"style": colorUranana
+					}).html($f.formatCurrency(balanceUranana, "JPY"))
+				);
+
+				$("#balanceSoccer").append(
+					$("<span></span>", {
+						"style": colorSoccer
+					}).html($f.formatCurrency(balanceSoccer, "JPY"))
+				);
+
+				for (var i in data["data"]["statement"]) {
+					var amount = data["data"]["statement"][i]["AMOUNT"];
+					var style = "color: #ffffff;";
+					var activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">入</div>";
+
+					if (amount < 0) {
+						style = "color: #ff6347;";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">出</div>";
+					}
+
+					$("<li></li>").append(
+						$("<h2></h2>").append(
+							$("<span></span>", {
+								"style": style
+							}).html(activity + " " + $f.formatCurrency(amount, "JPY"))
+						)
+					).append(
+						$("<p></p>").html(data["data"]["statement"][i]["CATEGORY"])
+					).append(
+						$("<p></p>").html(data["data"]["statement"][i]["MEMO"])
+					).append(
+						$("<p></p>", {
+							"class": "ui-li-aside"
+						}).html($f.formatDate(new Date(data["data"]["statement"][i]["DATE"]), "yyyy年MM月分"))
+					).appendTo($("#statement"));
+				}
+
+				$("#statement").listview("refresh");
+			}
+
+			function reset() {
+				var thisYear = new Date();
+				var lastYear = new Date(thisYear.getFullYear() - 1, thisYear.getMonth());
+				var nextYear = new Date(thisYear.getFullYear() + 1, thisYear.getMonth());
+
+				var years = {}
+				years[$f.formatDate(lastYear, "yyyy年")] = $f.formatDate(lastYear, "yyyy");
+				years[$f.formatDate(thisYear, "yyyy年")] = $f.formatDate(thisYear, "yyyy");
+				years[$f.formatDate(nextYear, "yyyy年")] = $f.formatDate(nextYear, "yyyy");
+
+				for (var key in years) {
+					$("#year").append($("<option></option>", {
+						"value": years[key]
+					}).html(key));
+				}
+
+				$("#year").val($f.formatDate(thisYear, "yyyy"));
+				$("#month").val($f.formatDate(thisYear, "MM"));
+
+				$("#amount").val("0");
+				$("#amountDisplay").val($f.formatCurrency($("#amount").val(), "JPY"));
+
+				$("#memo").val("");
+			}
+
+			function addNumber(number) {
+				var amount = parseInt($("#amount").val() + number);
+				$("#amount").val(amount);
+				$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
+			}
+
+			function clear() {
+				var amount = "0";
+				$("#amount").val(amount);
+				$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
+			}
+		</script>
+	</head>
+	<body>
+		<div id="page-balance" data-role="page" data-theme="b">
+			<div data-role="header">
+				<h1>残高照会</h1>
+				<a href="#page-registration" class="ui-btn ui-btn-icon-notext ui-icon-plus ui-corner-all ui-btn-right"></a>
+			</div>
+			<div role="main" class="ui-content">
+				<div data-role="tabs">
+					<div data-role="navbar" data-iconsop="left">
+						<ul>
+							<li><a href="#tab-balance" class="ui-btn-active">現在残高</a></li>
+							<li><a href="#tab-activity">入出金明細</a></li>
+						</ul>
+					</div>
+					<div id="tab-balance">
+						<p>
+							<div class="ui-field-contain">
+								<label>NaNA</label>
+								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
+									<span id="balanceNana" style="font-weight: bold;"></span>
+								</div>
+							</div>
+							<div class="ui-field-contain">
+								<label>ウラナナ</label>
+								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
+									<span id="balanceUranana" style="font-weight: bold;"></span>
+								</div>
+							</div>
+							<div class="ui-field-contain">
+								<label>サッカー部</label>
+								<div style="background-color: #1d1d1d; padding: 10px; -webkit-border-radius: 5px; text-align: right;">
+									<span id="balanceSoccer" style="font-weight: bold;"></span>
+								</div>
+							</div>
+						</p>
+					</div>
+					<div id="tab-activity">
+						<p>
+							<div class="ui-field-contain">
+								<ul data-role="listview" id="statement"></ul>
+							</div>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+
+		<div id="page-registration" data-role="page" data-theme="b">
+			<div data-role="header">
+				<a href="#page-balance" class="ui-btn ui-btn-icon-notext ui-icon-back ui-corner-all ui-btn-left"></a>
+				<h1>入出金登録</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<form id="form" name="form" action="#" method="post" data-ajax="false">
+					<div class="ui-field-contain" style="text-align: center;">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" id="nana" name="category" value="NANA" checked="checked">
+							<label for="nana">NaNA</label>
+							<input type="radio" id="uranana" name="category" value="URANANA">
+							<label for="uranana">ウラナナ</label>
+							<input  type="radio"id="soccer" name="category" value="SOCCER">
+							<label for="soccer">サッカー部</label>
+						</fieldset>
+					</div>
+					<div class="ui-field-contain" style="text-align: center;">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" id="deposits" name="activity" value="1" checked="checked">
+							<label for="deposits" style="width: 100px; text-align: center;">入金</label>
+							<input  type="radio"id="withdrawals" name="activity" value="-1">
+							<label for="withdrawals" style="width: 100px; text-align: center;">出金</label>
+						</fieldset>
+					</div>
+					<div class="ui-field-contain">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<select id="year" name="year"></select>
+							</div>
+							<div class="ui-block-b">
+								<select id="month" name="month">
+									<option value="01">1月分</option>
+									<option value="02">2月分</option>
+									<option value="03">3月分</option>
+									<option value="04">4月分</option>
+									<option value="05">5月分</option>
+									<option value="06">6月分</option>
+									<option value="07">7月分</option>
+									<option value="08">8月分</option>
+									<option value="09">9月分</option>
+									<option value="10">10月分</option>
+									<option value="11">11月分</option>
+									<option value="12">12月分</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="ui-field-contain">
+						<label for="amount">金額</label>
+						<input type="text" id="amountDisplay" name="amountDisplay" style="text-align: right;" readonly="readonly">
+						<input type="hidden" id="amount" name="amount" value="0">
+						<div class="ui-grid-b">
+							<div class="ui-block-a">
+								<button id="number7Button" class="ui-btn ui-corner-all">7</button>
+							</div>
+							<div class="ui-block-b">
+								<button id="number8Button" class="ui-btn ui-corner-all">8</button>
+							</div>
+							<div class="ui-block-c">
+								<button id="number9Button" class="ui-btn ui-corner-all">9</button>
+							</div>
+							<div class="ui-block-a">
+								<button id="number4Button" class="ui-btn ui-corner-all">4</button>
+							</div>
+							<div class="ui-block-b">
+								<button id="number5Button" class="ui-btn ui-corner-all">5</button>
+							</div>
+							<div class="ui-block-c">
+								<button id="number6Button" class="ui-btn ui-corner-all">6</button>
+							</div>
+							<div class="ui-block-a">
+								<button id="number1Button" class="ui-btn ui-corner-all">1</button>
+							</div>
+							<div class="ui-block-b">
+								<button id="number2Button" class="ui-btn ui-corner-all">2</button>
+							</div>
+							<div class="ui-block-c">
+								<button id="number3Button" class="ui-btn ui-corner-all">3</button>
+							</div>
+							<div class="ui-block-a">
+								<button id="number0Button" class="ui-btn ui-corner-all">0</button>
+							</div>
+							<div class="ui-block-b">
+								<button id="number00Button" class="ui-btn ui-corner-all">00</button>
+							</div>
+							<div class="ui-block-c">
+								<button id="clearButton" class="ui-btn ui-corner-all">クリア</button>
+							</div>
+						</div>
+					</div>
+					<div class="ui-field-contain">
+						<label for="memo">メモ</label>
+						<textarea id="memo" name="memo"></textarea>
+					</div>
+					<div class="ui-field-contain">
+						<button id="registerButton" class="ui-btn ui-corner-all">登録する</button>
+					</div>
+				</form>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+	</body>
+</html>

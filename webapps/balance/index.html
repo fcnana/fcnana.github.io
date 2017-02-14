@@ -4,24 +4,25 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 		<title>会計 | FC NaNA</title>
-		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 		<style type="text/css">
 			span.required, label.error {
 				color: #f08080;
 			}
 		</style>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script type="text/javascript">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script>
 			$(document).on("mobileinit", function() {
-				$.mobile.loader.prototype.options.text = "waiting please.";
+				$.mobile.loader.prototype.options.text = "Loading...";
 				$.mobile.loader.prototype.options.textonly = false;
 				$.mobile.loader.prototype.options.textVisible = true;
 				$.mobile.loader.prototype.options.theme = "b";
 			});
 		</script>
-		<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-		<script src="//sites.google.com/site/fcnanalibrary/fcnana.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="https://fcnana.github.io/webapps/js/jquery.validate.min.js"></script>
+		<script src="https://fcnana.github.io/webapps/js/common.js"></script>
 		<script>
 			$(function() {
 				$("#form").submit(function(event) {

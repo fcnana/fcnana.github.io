@@ -168,6 +168,8 @@
 			}
 
 			function reset() {
+				$("input[type='radio'][name='category']").val("NANA");
+
 				var thisYear = new Date();
 				var lastYear = new Date(thisYear.getFullYear() - 1, thisYear.getMonth());
 				var nextYear = new Date(thisYear.getFullYear() + 1, thisYear.getMonth());
@@ -179,10 +181,10 @@
 
 				$("#year").empty();
 
-				for (var key in years) {
+				for (var value in years) {
 					$("#year").append($("<option></option>", {
-						"value": key
-					}).html(years[key]));
+						"value": value
+					}).html(years[value]));
 				}
 
 				$("#year").val($f.formatDate(thisYear, "yyyy"));
@@ -205,10 +207,10 @@
 
 				$("#month").empty();
 
-				for (var key in months) {
+				for (var value in months) {
 					$("#month").append($("<option></option>", {
-						"value": key
-					}).html(months[key]));
+						"value": value
+					}).html(months[value]));
 				}
 
 				$("#month").val($f.formatDate(thisYear, "MM"));
@@ -286,7 +288,7 @@
 				<form id="form" name="form" action="#" method="post" data-ajax="false">
 					<div class="ui-field-contain" style="text-align: center;">
 						<fieldset data-role="controlgroup" data-type="horizontal">
-							<input type="radio" id="nana" name="category" value="NANA" checked="checked">
+							<input type="radio" id="nana" name="category" value="NANA">
 							<label for="nana">NaNA</label>
 							<input type="radio" id="uranana" name="category" value="URANANA">
 							<label for="uranana">ウラナナ</label>

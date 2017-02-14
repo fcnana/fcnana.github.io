@@ -91,7 +91,7 @@
 							"function": "registerAmount",
 							"date": $("#year").val() + "/" + $("#month").val(),
 							"category": $("[name='category']:checked").val(),
-							"amount": $("#amount").val() * $("[name='activity']:checked").val(),
+							"amount": $("#amount").val(),
 							"memo": $("#memo").val()
 						}, function(data) {
 							read(data);
@@ -173,17 +173,43 @@
 				var nextYear = new Date(thisYear.getFullYear() + 1, thisYear.getMonth());
 
 				var years = {}
-				years[$f.formatDate(lastYear, "yyyy年")] = $f.formatDate(lastYear, "yyyy");
-				years[$f.formatDate(thisYear, "yyyy年")] = $f.formatDate(thisYear, "yyyy");
-				years[$f.formatDate(nextYear, "yyyy年")] = $f.formatDate(nextYear, "yyyy");
+				years[$f.formatDate(lastYear, "yyyy")] = $f.formatDate(lastYear, "yyyy年");
+				years[$f.formatDate(thisYear, "yyyy")] = $f.formatDate(thisYear, "yyyy年");
+				years[$f.formatDate(nextYear, "yyyy")] = $f.formatDate(nextYear, "yyyy年");
+
+				$("#year").empty();
 
 				for (var key in years) {
 					$("#year").append($("<option></option>", {
-						"value": years[key]
-					}).html(key));
+						"value": key
+					}).html(years[key]));
 				}
 
 				$("#year").val($f.formatDate(thisYear, "yyyy"));
+
+				var months = {
+					"01": "1月分",
+					"02": "2月分",
+					"03": "3月分",
+					"04": "4月分",
+					"05": "5月分",
+					"06": "6月分",
+					"07": "7月分",
+					"08": "8月分",
+					"09": "9月分",
+					"10": "10月分",
+					"11": "11月分",
+					"12": "12月分"
+				};
+
+				$("#month").empty();
+
+				for (var key in years) {
+					$("#month").append($("<option></option>", {
+						"value": key
+					}).html(months[key]));
+				}
+
 				$("#month").val($f.formatDate(thisYear, "MM"));
 
 				$("#amount").val("0");
@@ -252,7 +278,7 @@
 		<div id="page-registration" data-role="page" data-theme="b">
 			<div data-role="header">
 				<a href="#page-balance" class="ui-btn ui-btn-icon-notext ui-icon-back ui-corner-all ui-btn-left"></a>
-				<h1>入出金登録</h1>
+				<h1>残高登録</h1>
 			</div>
 			<div role="main" class="ui-content">
 				<form id="form" name="form" action="#" method="post" data-ajax="false">
@@ -264,14 +290,6 @@
 							<label for="uranana">ウラナナ</label>
 							<input  type="radio"id="soccer" name="category" value="SOCCER">
 							<label for="soccer">サッカー部</label>
-						</fieldset>
-					</div>
-					<div class="ui-field-contain" style="text-align: center;">
-						<fieldset data-role="controlgroup" data-type="horizontal">
-							<input type="radio" id="deposits" name="activity" value="1" checked="checked">
-							<label for="deposits" style="width: 100px; text-align: center;">入金</label>
-							<input  type="radio"id="withdrawals" name="activity" value="-1">
-							<label for="withdrawals" style="width: 100px; text-align: center;">出金</label>
 						</fieldset>
 					</div>
 					<div class="ui-field-contain">
@@ -342,10 +360,10 @@
 					</div>
 					<div class="ui-field-contain">
 						<label for="memo">メモ</label>
-						<textarea id="memo" name="memo"></textarea>
+						<input type="text" id="memo" name="memo">
 					</div>
 					<div class="ui-field-contain">
-						<button id="registerButton" class="ui-btn ui-corner-all">記録する</button>
+						<button id="registerButton" class="ui-btn ui-corner-all">登録する</button>
 					</div>
 				</form>
 			</div>

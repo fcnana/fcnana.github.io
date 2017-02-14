@@ -186,7 +186,7 @@
 				}
 
 				$("#year").val($f.formatDate(thisYear, "yyyy"));
-				$("#year").selectmenu("refresh");
+				$("#year").selectmenu().selectmenu("refresh");
 
 				var months = {
 					"01": "1月分",
@@ -212,7 +212,7 @@
 				}
 
 				$("#month").val($f.formatDate(thisYear, "MM"));
-				$("#month").selectmenu("refresh");
+				$("#month").selectmenu().selectmenu("refresh");
 
 				$("#amount").val("0");
 				$("#amountDisplay").val($f.formatCurrency($("#amount").val(), "JPY"));

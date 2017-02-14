@@ -19,6 +19,12 @@
 				$.mobile.loader.prototype.options.textVisible = true;
 				$.mobile.loader.prototype.options.theme = "b";
 			});
+
+			$(document).on("mobileinit", function() {
+				$.mobile.listview.prototype.options.autodividersSelector = function(element) {
+					return element.data("ruby");
+				};
+			});
 		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 		<script src="https://fcnana.github.io/webapps/js/jquery.validate.min.js"></script>
@@ -141,7 +147,9 @@
 						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">出</div>";
 					}
 
-					$("<li></li>").append(
+					$("<li></li>", {
+						"data-ruby": $f.formatDate(new Date(data["data"]["statement"][i]["DATE"]), "yyyy年MM月分")
+					}).append(
 						$("<h2></h2>").append(
 							$("<span></span>", {
 								"style": style
@@ -150,11 +158,9 @@
 					).append(
 						$("<p></p>").html(data["data"]["statement"][i]["CATEGORY"])
 					).append(
-						$("<p></p>").html(data["data"]["statement"][i]["MEMO"])
-					).append(
 						$("<p></p>", {
 							"class": "ui-li-aside"
-						}).html($f.formatDate(new Date(data["data"]["statement"][i]["DATE"]), "yyyy年MM月分"))
+						}).html(data["data"]["statement"][i]["MEMO"])
 					).appendTo($("#statement"));
 				}
 
@@ -232,7 +238,7 @@
 					<div id="tab-activity">
 						<p>
 							<div class="ui-field-contain">
-								<ul data-role="listview" id="statement"></ul>
+								<ul data-role="listview" id="statement" data-autodividers="true"></ul>
 							</div>
 						</p>
 					</div>

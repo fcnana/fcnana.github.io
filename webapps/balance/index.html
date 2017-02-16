@@ -190,27 +190,14 @@
 				$("#year").val($f.formatDate(thisYear, "yyyy"));
 				$("#year").selectmenu().selectmenu("refresh");
 
-				var months = {
-					"01": "1月",
-					"02": "2月",
-					"03": "3月",
-					"04": "4月",
-					"05": "5月",
-					"06": "6月",
-					"07": "7月",
-					"08": "8月",
-					"09": "9月",
-					"10": "10月",
-					"11": "11月",
-					"12": "12月"
-				};
+				var months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
 				$("#month").empty();
 
 				for (var value in months) {
 					$("#month").append($("<option></option>", {
-						"value": value
-					}).html(months[value]));
+						"value": ("0" + value).slice(2);
+					}).html(months[value] + "月"));
 				}
 
 				$("#month").val($f.formatDate(thisYear, "MM"));

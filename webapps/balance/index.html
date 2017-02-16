@@ -169,7 +169,7 @@
 
 			function reset() {
 				$("#nana").prop("checked", true);
-				$("input[type='radio'][name='category']").checkboxradio("refresh");
+				$("input[type='radio'][name='category']").checkboxradio().checkboxradio("refresh");
 
 				var thisYear = new Date();
 				var lastYear = new Date(thisYear.getFullYear() - 1, thisYear.getMonth());

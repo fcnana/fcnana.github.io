@@ -89,7 +89,7 @@
 					if (confirm("登録します。よろしいですか？")) {
 						$f.getJSONP("https://script.google.com/macros/s/AKfycbyqg7OOoe2poYRQZHMJ4QJa7BLZByhy4hAPCKFc3dyX1B6oI20/exec", {
 							"function": "registerAmount",
-							"date": $("#year").val() + "/" + $("#month").val(),
+							"date": $("#year").val() + "/" + $("#month").val() + "/01",
 							"category": $("[name='category']:checked").val(),
 							"amount": $("#amount").val(),
 							"memo": $("#memo").val()

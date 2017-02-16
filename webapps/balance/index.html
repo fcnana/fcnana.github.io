@@ -140,11 +140,11 @@
 				for (var i in data["data"]["statement"]) {
 					var amount = data["data"]["statement"][i]["AMOUNT"];
 					var style = "color: #ffffff;";
-					var activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">入</div>";
+					var activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">残高</div>";
 
 					if (amount < 0) {
 						style = "color: #ff6347;";
-						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">出</div>";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">残高</div>";
 					}
 
 					$("<li></li>", {

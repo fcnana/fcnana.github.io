@@ -196,7 +196,7 @@
 
 				for (var value in months) {
 					$("#month").append($("<option></option>", {
-						"value": ("0" + value).slice(-2)
+						"value": ("0" + months[value]).slice(-2)
 					}).html(months[value] + "月"));
 				}
 

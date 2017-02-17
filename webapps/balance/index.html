@@ -163,8 +163,6 @@
 							}).html(activity + " " + $f.formatCurrency(data["data"]["statement"][i]["AMOUNT"], "JPY"))
 						)
 					).append(
-						$("<p></p>").html(data["data"]["statement"][i]["CATEGORY"])
-					).append(
 						$("<p></p>", {
 							"class": "ui-li-aside"
 						}).html(data["data"]["statement"][i]["MEMO"])

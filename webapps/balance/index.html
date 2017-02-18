@@ -138,18 +138,14 @@
 				$("#balanceSoccer").val($f.formatCurrency(balanceSoccer, "JPY")).css("color", colorSoccer);
 
 				for (var i in data["data"]["statement"]) {
-					var style = "color: #ffffff;";
 					var activity = "";
 
 					if (data["data"]["statement"][i]["CATEGORY"] == "NANA") {
-						style = "color: #ff6347;";
-						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">NaNA</div>";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #33ff99; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 100px;\">NaNA</div>";
 					} else if (data["data"]["statement"][i]["CATEGORY"] == "URANANA") {
-						style = "color: #ff99ff;";
-						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">ウラナナ</div>";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff99ff; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 100px;\">ウラナナ</div>";
 					} else if (data["data"]["statement"][i]["CATEGORY"] == "SOCCER") {
-						style = "color: #ffff99;";
-						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ff6347; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px;\">サッカー部</div>";
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #ffff99; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 100px;\">サッカー部</div>";
 					} else {
 						// do-nothing
 					}
@@ -159,7 +155,7 @@
 					}).append(
 						$("<h2></h2>").append(
 							$("<span></span>", {
-								"style": style
+								"style": "color: #ffffff;"
 							}).html(activity + " " + $f.formatCurrency(data["data"]["statement"][i]["AMOUNT"], "JPY"))
 						)
 					).append(

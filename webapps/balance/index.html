@@ -111,14 +111,17 @@
 			function read(data) {
 				$("#balanceNana").empty();
 				$("#balanceUranana").empty();
+				$("#balanceMokuanana").empty();
 				$("#balanceSoccer").empty();
 				$("#statement").empty();
 
 				var balanceNana = data["data"]["balanceNana"][0]["AMOUNT"];
 				var balanceUranana = data["data"]["balanceUranana"][0]["AMOUNT"];
+				var balanceMokunana = data["data"]["balanceMokunana"][0]["AMOUNT"];
 				var balanceSoccer = data["data"]["balanceSoccer"][0]["AMOUNT"];
 				var colorNana = "#ffffff";
 				var colorUranana = "#ffffff";
+				var colorMokunana = "#ffffff";
 				var colorSoccer = "#ffffff";
 
 				if (parseInt(balanceNana) < 0) {
@@ -129,12 +132,17 @@
 					colorUranana = "#ff6347;";
 				}
 
+				if (parseInt(balanceMokunana) < 0) {
+					colorMokunana = "#ff6347;";
+				}
+
 				if (parseInt(balanceSoccer) < 0) {
 					colorSoccer = "#ff6347;";
 				}
 
 				$("#balanceNana").val($f.formatCurrency(balanceNana, "JPY")).css("color", colorNana);
 				$("#balanceUranana").val($f.formatCurrency(balanceUranana, "JPY")).css("color", colorUranana);
+				$("#balanceMokunana").val($f.formatCurrency(balanceMokunana, "JPY")).css("color", colorMokunana);
 				$("#balanceSoccer").val($f.formatCurrency(balanceSoccer, "JPY")).css("color", colorSoccer);
 
 				for (var i in data["data"]["statement"]) {
@@ -144,6 +152,8 @@
 						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #008080; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 80px;\">NaNA</div>";
 					} else if (data["data"]["statement"][i]["CATEGORY"] == "URANANA") {
 						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #708090; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 80px;\">ウラナナ</div>";
+					} else if (data["data"]["statement"][i]["CATEGORY"] == "MOKUNANA") {
+						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #d06d8c; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 80px;\">モクナナ</div>";
 					} else if (data["data"]["statement"][i]["CATEGORY"] == "SOCCER") {
 						activity = "<div style=\"display: inline-block; color: #ffffff; background-color: #daa520; text-shadow: none; padding: 3px 5px 3px 5px; margin-right: 10px; -webkit-border-radius: 5px; width: 80px;\">サッカー部</div>";
 					} else {
@@ -247,6 +257,10 @@
 							<div class="ui-field-contain">
 								<label for="balanceUranana">ウラナナ</label>
 								<input type="text" id="balanceUranana" name="balanceUranana" style="text-align: right;" readonly="readonly">
+							</div>
+							<div class="ui-field-contain">
+								<label for="balanceMokunana">モクナナ</label>
+								<input type="text" id="balanceMokunana" name="balanceMokunana" style="text-align: right;" readonly="readonly">
 							</div>
 							<div class="ui-field-contain">
 								<label for="balanceSoccer">サッカー部</label>

@@ -175,7 +175,7 @@
 					).appendTo($("#statement"));
 				}
 
-				$("#statement").listview("refresh");
+				$("#statement").listview().listview("refresh");
 			}
 
 			function reset() {
@@ -289,7 +289,8 @@
 			</div>
 			<div role="main" class="ui-content">
 				<form id="form" name="form" action="#" method="post" data-ajax="false">
-					<div class="ui-field-contain" style="text-align: center;">
+					<div class="ui-field-contain">
+						<label>カテゴリー</label>
 						<fieldset data-role="controlgroup">
 							<input type="radio" id="nana" name="category" value="NANA">
 							<label for="nana">NaNA</label>
@@ -302,6 +303,7 @@
 						</fieldset>
 					</div>
 					<div class="ui-field-contain">
+						<label>年月</label>
 						<div class="ui-grid-a">
 							<div class="ui-block-a">
 								<select id="year" name="year"></select>

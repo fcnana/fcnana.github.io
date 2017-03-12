@@ -77,8 +77,8 @@
 					addNumber("0");
 				});
 
-				$("#number00Button").click(function() {
-					addNumber("00");
+				$("#minusButton").click(function() {
+					minus();
 				});
 
 				$("#clearButton").click(function() {
@@ -144,6 +144,9 @@
 				$("#balanceUranana").val($f.formatCurrency(balanceUranana, "JPY")).css("color", colorUranana);
 				$("#balanceMokunana").val($f.formatCurrency(balanceMokunana, "JPY")).css("color", colorMokunana);
 				$("#balanceSoccer").val($f.formatCurrency(balanceSoccer, "JPY")).css("color", colorSoccer);
+
+				var balanceTotal = balanceNana + balanceUranana + balanceMokunana + balanceSoccer;
+				$("#balanceTotal").val($f.formatCurrency(balanceTotal, "JPY"));
 
 				for (var i in data["data"]["statement"]) {
 					var activity = "";
@@ -227,10 +230,30 @@
 				$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
 			}
 
+			function minus() {
+				var amount = parseInt($("#amount").val()) * -1;
+
+				if (amount < 0) {
+					$("#minusButton").css("background-color", "#22aadd");
+					$("#minusButton").css("border-color", "#22aadd");
+					$("#amount").val(amount);
+					$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
+				} else if (amount > 0) {
+					$("#minusButton").css("background-color", "#373737");
+					$("#minusButton").css("border-color", "#1f1f1f");
+					$("#amount").val(amount);
+					$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
+				} else {
+					$("#minusButton").css("background-color", "#373737");
+					$("#minusButton").css("border-color", "#1f1f1f");
+				}
+			}
+
 			function clear() {
 				var amount = "0";
 				$("#amount").val(amount);
 				$("#amountDisplay").val($f.formatCurrency(amount, "JPY"));
+				minus();
 			}
 		</script>
 	</head>
@@ -266,6 +289,10 @@
 							<div class="ui-field-contain">
 								<label for="balanceSoccer">サッカー部</label>
 								<input type="text" id="balanceSoccer" name="balanceSoccer" style="text-align: right;" readonly="readonly">
+							</div>
+							<div class="ui-field-contain">
+								<label for="balanceTotal">合計</label>
+								<input type="text" id="balanceTotal" name="balanceTotal" style="text-align: right;" readonly="readonly">
 							</div>
 						</p>
 					</div>
@@ -347,10 +374,10 @@
 								<button id="number3Button" class="ui-btn ui-corner-all">3</button>
 							</div>
 							<div class="ui-block-a">
-								<button id="number0Button" class="ui-btn ui-corner-all">0</button>
+								<button id="minusButton" class="ui-btn ui-corner-all">-</button>
 							</div>
 							<div class="ui-block-b">
-								<button id="number00Button" class="ui-btn ui-corner-all">00</button>
+								<button id="number0Button" class="ui-btn ui-corner-all">0</button>
 							</div>
 							<div class="ui-block-c">
 								<button id="clearButton" class="ui-btn ui-corner-all">クリア</button>

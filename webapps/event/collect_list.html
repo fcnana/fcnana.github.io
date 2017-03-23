@@ -81,7 +81,7 @@
 					$("#amount").val("0");
 					$("#amountDisp").val($f.formatCurrency("0", "JPY"));
 				});
- 
+
 				$("#clear").click(function() {
 					var amount = $("#amount").val();
 					amount = amount.slice(0, amount.length - 1);
@@ -267,7 +267,7 @@
 				<div role="main" class="ui-content">
 					<div class="ui-field-contain">
 						<input type="hidden" id="rowid">
-						<input type="text" id="amountDisp" style="text-align: right;">
+						<input type="text" id="amountDisp" readonly="readonly" style="text-align: right;">
 						<input type="hidden" id="amount" value="0">
 					</div>
 					<div class="ui-field-contain">

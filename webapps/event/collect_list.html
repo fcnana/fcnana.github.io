@@ -31,6 +31,10 @@
 					read(data);
 				});
 
+				$("#addRow").click(function() {
+					addRow(Math.floor(Math.random() * 10000000000), "", "0", "false");
+				});
+
 				inputNumber("0");
 
 				$("#number1").click(function() {
@@ -177,6 +181,54 @@
 				sumCollect();
 			}
 
+			function addRow(rowid, name, amount, collect) {
+				$("<div></div>", {
+					"class": "ui-block-a"
+				}).append($("<input/>", {
+					"type": "text",
+					"id": "name_" + rowid,
+					"name": "name_" + rowid,
+					"value": name,
+					"onchange": "registerData('" + rowid + "');"
+				})).appendTo($("#collectList"));
+
+				$("<div></div>", {
+					"class": "ui-block-b"
+				}).append($("<input/>", {
+					"type": "text",
+					"id": "displayAmount_" + rowid,
+					"name": "displayAmount_" + rowid,
+					"class": "displayAmount",
+					"value": $f.formatCurrency(amount, "JPY"),
+					"readonly": "readonly",
+					"onclick": "openNumPad('" + rowid + "');"
+				}).css("text-align", "right")).append($("<input/>", {
+					"type": "hidden",
+					"id": "amount_" + rowid,
+					"name": "amount_" + rowid,
+					"class": "amount",
+					"value": amount,
+					"onchange": "sumAmount(); sumCollect(); registerData('" + rowid + "');"
+				})).appendTo($("#collectList"));
+
+				$("<div></div>", {
+					"class": "ui-block-c",
+					"style": "padding: 3px;"
+				}).append($("<select></select>", {
+					"id": "collect_" + rowid,
+					"name": "collect_" + rowid,
+					"data-rowid": rowid,
+					"class": "collect",
+					"data-role": "flipswitch",
+					"onchange": "sumCollect(); registerData('" + rowid + "');"
+				}).append($("<option></option>", {
+					"value": "false"
+				}).html("未")).append($("<option></option>", {
+					"value": "true"
+				}).html("済")).selectmenu().selectmenu("refresh").val(collect.toString())).appendTo($("#collectList"));
+				$("#collectList").trigger("create");
+			}
+
 			function sumAmount() {
 				var totalAmount = 0;
 				$(".amount").each(function(index, element) {
@@ -254,6 +306,9 @@
 							<div class="ui-bar-b" style="padding: 5px;">集金</div>
 						</div>
 					</div>
+				</div>
+				<div class="ui-field-contain">
+					<button id="addRow" class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus">行を追加する</button>
 				</div>
 			</div>
 			<div data-role="footer">

@@ -32,7 +32,15 @@
 				});
 
 				$("#addRow").click(function() {
-					addRow(Math.floor(Math.random() * 10000000000), "", "0", "false");
+					$f.getJSONP("https://script.google.com/macros/s/AKfycbzoz-fNpSOt8KRNiW9GcAeVfvbURpeQcsXgsclbNoaVO_zUcAE/exec", {
+						"function": "registerData",
+						"rowid": "",
+						"name": "",
+						"amount": "0",
+						"collect": "false"
+					}, function(data) {
+						read(data);
+					});
 				});
 
 				inputNumber("0");

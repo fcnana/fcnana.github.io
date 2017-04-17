@@ -47,8 +47,11 @@
 
 			$(function() {
 				$x("button").click(function() {
-					$x(this).prop("disabled", true);
-					$x(this).prop("disabled", false);
+					var button = $x(this)
+					button.prop("disabled", true);
+					setTimeout(function() {
+						button.prop("disabled", false);
+					}, 300);
 				});
 
 				$x("#init-gameNo").change(function() {

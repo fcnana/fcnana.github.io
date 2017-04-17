@@ -206,19 +206,24 @@
 				setTimeout(function() {
 					$x("#gameNo-selector").popup("open");
 				}, 0);
-			});
 
-			var didFirstTap = false ;
-			$x("div").touchstart(function(e) {
-				e.preventDefault() ;
-				if(!didFirstTap) {
-					didFirstTap = true ;
-					setTimeout(function() {
-						didFirstTap = false ;
-					}, 350);
-				} else {
-					didFirstTap = false ;
-				}
+				(function(win, doc) {
+					"use strict";
+					var tapFlag = false, timer;
+					doc.body.addEventListener("touchstart", function(e) {
+						if (tapFlag) {
+							e.preventDefault();
+						}
+					}, true);
+
+					doc.body.addEventListener("touchend", function(e) {
+						tapFlag = true;
+						clearTimeout(timer);
+						timer = setTimeout(function() {
+							tapFlag = false;
+						}, 200);
+					}, true);
+				})(window, document);
 			});
 		</script>
 	</head>

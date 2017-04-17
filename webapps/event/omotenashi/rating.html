@@ -217,7 +217,7 @@
 			var lastTouchEnd = 0;
 			document.documentElement.addEventListener("touchend", function (event) {
 				var now = (new Date()).getTime();
-				if (now - lastTouchEnd <= 500) {
+				if (now - lastTouchEnd <= 700) {
 					event.preventDefault();
 				}
 				lastTouchEnd = now;

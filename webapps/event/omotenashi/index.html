@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>おもてなしCUP | FC NaNA</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script>
+			$(function() {
+				$("#rating").click(function() {
+					window.location = "./rating.html";
+				});
+
+				$("#score").click(function() {
+					window.location = "./score.html";
+				});
+
+				$("#rating-guideline").click(function() {
+					window.location = "./rating-guideline.html";
+				});
+
+				$("#team-registration").click(function() {
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header" data-position="fixed">
+				<h1>おもてなしCUP</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div class="ui-field-contain">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<button id="rating" class="ui-btn ui-corner-all"><i class="material-icons">exposure_plus_1</i><br>採点シート</button>
+						</div>
+						<div class="ui-block-b">
+							<button id="score" class="ui-btn ui-corner-all"><i class="material-icons">poll</i><br>スコア</button>
+						</div>
+						<div class="ui-block-a">
+							<button id="rating-guideline" class="ui-btn ui-corner-all"><i class="material-icons">info</i><br>採点ガイドライン</button>
+						</div>
+						<div class="ui-block-b">
+							<button id="team-registration" class="ui-btn ui-corner-all"><i class="material-icons">assignment</i><br>参加チーム登録</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+	</body>
+</html>

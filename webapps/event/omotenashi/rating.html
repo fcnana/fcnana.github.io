@@ -206,24 +206,6 @@
 				setTimeout(function() {
 					$x("#gameNo-selector").popup("open");
 				}, 0);
-
-				(function(win, doc) {
-					"use strict";
-					var tapFlag = false, timer;
-					doc.body.addEventListener("touchstart", function(e) {
-						if (tapFlag) {
-							e.preventDefault();
-						}
-					}, true);
-
-					doc.body.addEventListener("touchend", function(e) {
-						tapFlag = true;
-						clearTimeout(timer);
-						timer = setTimeout(function() {
-							tapFlag = false;
-						}, 200);
-					}, true);
-				})(window, document);
 			});
 		</script>
 	</head>

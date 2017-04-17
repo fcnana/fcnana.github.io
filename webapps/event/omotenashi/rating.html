@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>おもてなしCUP | FC NaNA</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<style type="text/css">
+			span.required, label.error {
+				color: #f08080;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>
+			$(document).on("mobileinit", function() {
+				$.mobile.loader.prototype.options.text = "Loading...";
+				$.mobile.loader.prototype.options.textonly = false;
+				$.mobile.loader.prototype.options.textVisible = true;
+			});
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="../../js/jquery.validate.min.js"></script>
+		<script src="../../js/jquery.extension.js"></script>
+		<script>
+			function increment(id) {
+				var value = parseInt($x(id).html());
+				$x(id).html(value + 1);
+			}
+
+			function decrement(id) {
+				var value = parseInt($x(id).html());
+				$x(id).html(value - 1);
+			}
+
+			function total(id, items) {
+				var total = 0;
+				for (var i in items) {
+					total += parseInt($x(items[i]).html());
+				}
+				$x(id).html(total);
+			}
+
+			function load() {
+				$x.log("change!");
+			}
+
+			$(function() {
+				$x("#init-gameNo").change(function() {
+					$x("#gameNo").val($x("#init-gameNo option:selected").val()).selectmenu("refresh");
+					$x("#gameNo-selector").popup("close");
+					load();
+				});
+
+				$x("#menu").click(function() {
+					window.location = "./index.html";
+				});
+
+				$x("#gameNo").change(function() {
+					load();
+				});
+
+				$x("#swap").click(function() {
+					var teamL = $x("#team-l").val();
+					var teamR = $x("#team-r").val();
+					$x("#team-l").val(teamR).selectmenu("refresh");
+					$x("#team-r").val(teamL).selectmenu("refresh");
+
+					var linkageL = $x("#linkage-l").html();
+					var linkageR = $x("#linkage-r").html();
+					$x("#linkage-l").html(linkageR);
+					$x("#linkage-r").html(linkageL);
+
+					var trickL = $x("#trick-l").html();
+					var trickR = $x("#trick-r").html();
+					$x("#trick-l").html(trickR);
+					$x("#trick-r").html(trickL);
+
+					var beginnerL = $x("#beginner-l").html();
+					var beginnerR = $x("#beginner-r").html();
+					$x("#beginner-l").html(beginnerR);
+					$x("#beginner-r").html(beginnerL);
+
+					var callL = $x("#teamWork-l").html();
+					var callR = $x("#teamWork-r").html();
+					$x("#teamWork-l").html(callR);
+					$x("#teamWork-r").html(callL);
+
+					var callL = $x("#score-l").html();
+					var callR = $x("#score-r").html();
+					$x("#score-l").html(callR);
+					$x("#score-r").html(callL);
+
+					var totalL = $x("#total-l").html();
+					var totalR = $x("#total-r").html();
+					$x("#total-l").html(totalR);
+					$x("#total-r").html(totalL);
+				});
+
+				$x("#linkage-l-neg").click(function() {
+					decrement("#linkage-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#linkage-l-plus").click(function() {
+					increment("#linkage-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#linkage-r-neg").click(function() {
+					decrement("#linkage-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#linkage-r-plus").click(function() {
+					increment("#linkage-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#trick-l-neg").click(function() {
+					decrement("#trick-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#trick-l-plus").click(function() {
+					increment("#trick-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#trick-r-neg").click(function() {
+					decrement("#trick-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#trick-r-plus").click(function() {
+					increment("#trick-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#beginner-l-neg").click(function() {
+					decrement("#beginner-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#beginner-l-plus").click(function() {
+					increment("#beginner-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#beginner-r-neg").click(function() {
+					decrement("#beginner-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#beginner-r-plus").click(function() {
+					increment("#beginner-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#teamWork-l-neg").click(function() {
+					decrement("#teamWork-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#teamWork-l-plus").click(function() {
+					increment("#teamWork-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#teamWork-r-neg").click(function() {
+					decrement("#teamWork-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#teamWork-r-plus").click(function() {
+					increment("#teamWork-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#score-l-neg").click(function() {
+					decrement("#score-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#score-l-plus").click(function() {
+					increment("#score-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				});
+
+				$x("#score-r-neg").click(function() {
+					decrement("#score-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#score-r-plus").click(function() {
+					increment("#score-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				});
+
+				$x("#save").click(function() {
+					if (confirm("保存します、よろしいですか？")) {
+						$x.loading();
+					}
+				});
+
+				setTimeout(function() {
+					$x("#gameNo-selector").popup("open");
+				}, 0);
+			});
+		</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="popup" id="gameNo-selector" data-overlay-theme="b" data-dismissible="false">
+				<div role="main" class="ui-content">
+					<div class="ui-field-contain">
+						<label for="init-gameNo">ゲームNo.を選択してください。</label>
+						<select id="init-gameNo">
+							<option value="">-</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div data-role="header" data-position="fixed">
+				<button id="menu" class="ui-btn ui-btn-icon-notext ui-icon-grid ui-corner-all"></button>
+				<h1>おもてなしCUP</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div class="ui-field-contain">
+					<label for="gameNo">ゲームNo.</label>
+					<select id="gameNo">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+					</select>
+				</div>
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a" style="width: 137.1876px;">
+							<select id="team-l">
+								<option value="チーム1">チーム1</option>
+								<option value="チーム2">チーム2</option>
+							</select>
+						</div>
+						<div class="ui-block-b" style="width: 0px;">
+						</div>
+						<div class="ui-block-c">
+							<button id="swap" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">swap_horiz</i></button>
+						</div>
+						<div class="ui-block-d" style="width: 137.1876px;">
+							<select id="team-r">
+								<option value="チーム1">チーム1</option>
+								<option value="チーム2">チーム2</option>
+							</select>
+						</div>
+						<div class="ui-block-e" style="width: 0px;">
+						</div>
+					</div>
+				</div>
+				<!-- 連携 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center;">連携</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="linkage-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center;">連携</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="linkage-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="linkage-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="linkage-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="linkage-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="linkage-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- 技 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center;">技</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="trick-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center;">技</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="trick-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="trick-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="trick-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="trick-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="trick-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- 初/女子/子供 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center; font-size: 0.7em;">初/女子/子供</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="beginner-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center; font-size: 0.7em;">初/女子/子供</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="beginner-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="beginner-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="beginner-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="beginner-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="beginner-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- チームワーク -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center; font-size: 0.7em;">チームワーク</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="teamWork-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center; font-size: 0.7em;">チームワーク</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="teamWork-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="teamWork-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="teamWork-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="teamWork-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="teamWork-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- 得点 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center;">得点</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="score-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center;">得点</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="score-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="score-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="score-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="score-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="score-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- 合計 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center;">合計</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="total-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center;">合計</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="total-r" style="text-align: center;">0</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui-field-contain">
+					<button id="save">保存する</button>
+				</div>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+	</body>
+</html>

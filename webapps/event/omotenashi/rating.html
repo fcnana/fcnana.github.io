@@ -12,13 +12,6 @@
 			}
 		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>
-			$(document).on("mobileinit", function() {
-				$.mobile.loader.prototype.options.text = "Loading...";
-				$.mobile.loader.prototype.options.textonly = false;
-				$.mobile.loader.prototype.options.textVisible = true;
-			});
-		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 		<script src="../../js/jquery.validate.min.js"></script>
 		<script src="../../js/jquery.extension.js"></script>
@@ -41,15 +34,55 @@
 				$x(id).html(total);
 			}
 
-			function load() {
-				$x.log("change!");
+			function load(data) {
+				var team = data["data"]["team"];
+				$x("<option></option>", {
+					"value": ""
+				}).html("選択してください。").appendTo("#team-l");
+
+				$x("<option></option>", {
+					"value": ""
+				}).html("選択してください。").appendTo("#team-r");
+
+				for (var value in team) {
+					$x("<option></option>", {
+						"value": value
+					}).html(team[value]).appendTo("#team-l");
+
+					$x("<option></option>", {
+						"value": value
+					}).html(team[value]).appendTo("#team-r");
+				}
+
+				var l = data["data"]["l"];
+				$x("#team-l").val(l["team"]).selectmenu("refresh");
+				$x("#linkage-l").html(l["linkage"]);
+				$x("#trick-l").html(l["trick"]);
+				$x("#beginner-l").html(l["beginner"]);
+				$x("#teamWork-l").html(l["teamWork"]);
+				$x("#score-l").html(l["score"]);
+				total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+
+				var r = data["data"]["r"];
+				$x("#team-r").val(r["team"]).selectmenu("refresh");
+				$x("#linkage-r").html(r["linkage"]);
+				$x("#trick-r").html(r["trick"]);
+				$x("#beginner-r").html(r["beginner"]);
+				$x("#teamWork-r").html(r["teamWork"]);
+				$x("#score-r").html(r["score"]);
+				total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
 			}
 
 			$(function() {
 				$x("#init-gameNo").change(function() {
 					$x("#gameNo").val($x("#init-gameNo option:selected").val()).selectmenu("refresh");
 					$x("#gameNo-selector").popup("close");
-					load();
+					$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+						"function": "getGame",
+						"gameNo": $x("#gameNo").val()
+					}, function(data) {
+						load(data);
+					});
 				});
 
 				$x("#menu").click(function() {
@@ -57,7 +90,12 @@
 				});
 
 				$x("#gameNo").change(function() {
-					load();
+					$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+						"function": "getGame",
+						"gameNo": $x("#gameNo").val()
+					}, function(data) {
+						load(data);
+					});
 				});
 
 				$x("#swap").click(function() {
@@ -95,6 +133,20 @@
 					var totalR = $x("#total-r").html();
 					$x("#total-l").html(totalR);
 					$x("#total-r").html(totalL);
+				});
+
+				$x("#team-l").change(function() {
+					if ($x("#team-l option:selected").val() == $x("#team-r option:selected").val()) {
+						$x("#team-l").val("").selectmenu("refresh");
+						alert("右に設定されていないチームを選択してください。");
+					}
+				});
+
+				$x("#team-r").change(function() {
+					if ($x("#team-l option:selected").val() == $x("#team-r option:selected").val()) {
+						$x("#team-r").val("").selectmenu("refresh");
+						alert("左に設定されていないチームを選択してください。");
+					}
 				});
 
 				$x("#linkage-l-neg").click(function() {
@@ -198,8 +250,30 @@
 				});
 
 				$x("#save").click(function() {
+					if ($x("#team-l option:selected").val() == "" || $x("#team-r option:selected").val() == "") {
+						alert("チームを選択してください。");
+						return;
+					}
+
 					if (confirm("保存します、よろしいですか？")) {
-						$x.loading();
+						$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+							"function": "registerGames",
+							"gameNo": $x("#gameNo").val(),
+							"team-l": $x("#team-l option:selected").val(),
+							"linkage-l": $x("#linkage-l").html(),
+							"trick-l": $x("#trick-l").html(),
+							"beginner-l": $x("#beginner-l").html(),
+							"teamWork-l": $x("#teamWork-l").html(),
+							"score-l": $x("#score-l").html(),
+							"team-r": $x("#team-r option:selected").val(),
+							"linkage-r": $x("#linkage-r").html(),
+							"trick-r": $x("#trick-r").html(),
+							"beginner-r": $x("#beginner-r").html(),
+							"teamWork-r": $x("#teamWork-r").html(),
+							"score-r": $x("#score-r").html()
+						}, function(data) {
+							load(data);
+						});
 					}
 				});
 
@@ -275,10 +349,7 @@
 				<div class="ui-field-contain">
 					<div class="ui-grid-d">
 						<div class="ui-block-a" style="width: 137.1876px;">
-							<select id="team-l">
-								<option value="チーム1">チーム1</option>
-								<option value="チーム2">チーム2</option>
-							</select>
+							<select id="team-l"></select>
 						</div>
 						<div class="ui-block-b" style="width: 0px;">
 						</div>
@@ -286,10 +357,7 @@
 							<button id="swap" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">swap_horiz</i></button>
 						</div>
 						<div class="ui-block-d" style="width: 137.1876px;">
-							<select id="team-r">
-								<option value="チーム1">チーム1</option>
-								<option value="チーム2">チーム2</option>
-							</select>
+							<select id="team-r"></select>
 						</div>
 						<div class="ui-block-e" style="width: 0px;">
 						</div>

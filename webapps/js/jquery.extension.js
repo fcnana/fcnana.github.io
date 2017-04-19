@@ -10,17 +10,34 @@ $x.log = function(message) {
 	console.log(message);
 }
 
-$x.loading = function() {
+$x.showLoading = function() {
 	$("div[name='blocking-overlay']").popup("open");
 	$.mobile.loading("show", {
 		text: "loading...",
 		textVisible: true,
 		textonly: false
 	});
-	setTimeout(function() {
-		$.mobile.loading("hide");
-		$("div[name='blocking-overlay']").popup("close");
-	}, 3000);
+}
+
+$x.hideLoading = function() {
+	$.mobile.loading("hide");
+	$("div[name='blocking-overlay']").popup("close");
+}
+
+$x.ajax = function(url, data, callback) {
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: data,
+		dataType: "jsonp",
+		beforeSend: function(jqXHR) {
+			$x.showLoading();
+		}
+	}).done(function(data, textStatus, jqXHR) {
+		callback(data);
+	}).always(function(jqXHR, textStatus) {
+		$x.hideLoading();
+	});
 }
 
 $(function() {

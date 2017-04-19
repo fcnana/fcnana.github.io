@@ -36,10 +36,13 @@
 
 			function load(data) {
 				var team = data["data"]["team"];
+
+				$x("#team-l").empty();
 				$x("<option></option>", {
 					"value": ""
 				}).html("選択してください。").appendTo("#team-l");
 
+				$x("#team-r").empty();
 				$x("<option></option>", {
 					"value": ""
 				}).html("選択してください。").appendTo("#team-r");

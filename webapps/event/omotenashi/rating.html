@@ -79,12 +79,12 @@
 			$(function() {
 				$x("#init-gameNo").change(function() {
 					$x("#gameNo").val($x("#init-gameNo option:selected").val()).selectmenu("refresh");
-					$x("#gameNo-selector").popup("close");
 					$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
 						"function": "getGame",
 						"gameNo": $x("#gameNo").val()
 					}, function(data) {
 						load(data);
+						$x("#gameNo-selector").popup("close");
 					});
 				});
 

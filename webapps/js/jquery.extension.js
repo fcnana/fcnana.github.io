@@ -35,6 +35,8 @@ $x.ajax = function(url, data, callback) {
 		}
 	}).done(function(data, textStatus, jqXHR) {
 		callback(data);
+	}).fail(function(data, textStatus, errorThrown) {
+		$x.log(errorThrown);
 	}).always(function(jqXHR, textStatus) {
 		$x.hideLoading();
 	});
@@ -46,6 +48,7 @@ $(function() {
 			"data-role": "popup",
 			"name": "blocking-overlay",
 			"data-overlay-theme": "b",
+			"data-history": false,
 			"data-dismissible": false
 		}).appendTo($(this));
 		$(this).enhanceWithin();

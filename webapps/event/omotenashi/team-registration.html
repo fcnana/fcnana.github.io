@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+		<title>おもてなしCUP | FC NaNA</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<style type="text/css">
+			span.required, label.error {
+				color: #f08080;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="../../js/jquery.validate.min.js"></script>
+		<script src="../../js/jquery.extension.js"></script>
+		<script>
+			function load(data) {
+				$x("#list").empty();
+				var teams = data["data"];
+				for (var i in teams) {
+					var a = $x("<a></a>", {
+						"id": teams[i]["ROWID"],
+						"data-team": teams[i]["TEAM"]
+					});
+
+					$x(document).off("click", "#" + teams[i]["ROWID"]);
+					$x(document).on("click", "#" + teams[i]["ROWID"], function() {
+						if (confirm($x(this).attr("data-team") + "を削除します。よろしいですか？")) {
+							$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+								"function": "deleteTeam",
+								"rowid": $x(this).attr("id")
+							}, function(data) {
+								load(data);
+							});
+						}
+					});
+
+					$x("<li></li>").append($x("<a></a>").html(teams[i]["TEAM"])).append(a).appendTo($x("#list"));
+				}
+				$x("#list").listview().listview("refresh");
+			}
+
+			$x(function() {
+				$x("#menu").click(function() {
+					window.location = "./index.html";
+				});
+
+				$x("#save").click(function() {
+					if ($x("#team").val() == "") {
+						alert("チーム名を入力してください。");
+						return;
+					}
+
+					if (confirm("チームを追加します。よろしいですか？")) {
+						$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+							"function": "registerTeam",
+							"team": $x("#team").val()
+						}, function(data) {
+							load(data);
+							$x("#team").val("");
+						});
+					}
+				});
+
+				$x.ajax("https://script.google.com/macros/s/AKfycbxCXPYmh2b6grPzO1B1cqoFy88mXidL__Z_d7l4MHsIj7JxelUs/exec", {
+					"function": "getTeamList"
+				}, function(data) {
+					load(data);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header" data-position="fixed">
+				<button id="menu" class="ui-btn ui-btn-icon-notext ui-icon-grid ui-corner-all"></button>
+				<h1>おもてなしCUP</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div class="ui-field-contain">
+					<ul data-role="listview" id="list" data-split-icon="delete"></ul>
+				</div>
+				<div class="ui-field-contain">
+					<label for="team">チーム名</label>
+					<input type="text" id="team">
+				</div>
+				<div class="ui-field-contain">
+					<button id="save">追加する</button>
+				</div>
+			</div>
+			<div data-role="footer">
+				<h1>&copy; FC NaNA</h1>
+			</div>
+		</div>
+	</body>
+</html>

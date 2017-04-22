@@ -61,19 +61,19 @@
 				$x("#team-l").val(l["team"]).selectmenu("refresh");
 				$x("#linkage-l").html(l["linkage"]);
 				$x("#trick-l").html(l["trick"]);
-				$x("#beginner-l").html(l["beginner"]);
 				$x("#teamWork-l").html(l["teamWork"]);
 				$x("#score-l").html(l["score"]);
-				total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+				$x("#notConform-l").html(l["notConform"]);
+				total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 
 				var r = data["data"]["r"];
 				$x("#team-r").val(r["team"]).selectmenu("refresh");
 				$x("#linkage-r").html(r["linkage"]);
 				$x("#trick-r").html(r["trick"]);
-				$x("#beginner-r").html(r["beginner"]);
 				$x("#teamWork-r").html(r["teamWork"]);
 				$x("#score-r").html(r["score"]);
-				total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+				$x("#notConform-r").html(r["notConform"]);
+				total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 			}
 
 			$(function() {
@@ -117,20 +117,20 @@
 					$x("#trick-l").html(trickR);
 					$x("#trick-r").html(trickL);
 
-					var beginnerL = $x("#beginner-l").html();
-					var beginnerR = $x("#beginner-r").html();
-					$x("#beginner-l").html(beginnerR);
-					$x("#beginner-r").html(beginnerL);
+					var teamWorkL = $x("#teamWork-l").html();
+					var teamWorkR = $x("#teamWork-r").html();
+					$x("#teamWork-l").html(teamWorkR);
+					$x("#teamWork-r").html(teamWorkL);
 
-					var callL = $x("#teamWork-l").html();
-					var callR = $x("#teamWork-r").html();
-					$x("#teamWork-l").html(callR);
-					$x("#teamWork-r").html(callL);
+					var scoreL = $x("#score-l").html();
+					var scoreR = $x("#score-r").html();
+					$x("#score-l").html(scoreR);
+					$x("#score-r").html(scoreL);
 
-					var callL = $x("#score-l").html();
-					var callR = $x("#score-r").html();
-					$x("#score-l").html(callR);
-					$x("#score-r").html(callL);
+					var notConformL = $x("#notConform-l").html();
+					var notConformR = $x("#notConform-r").html();
+					$x("#notConform-l").html(notConformR);
+					$x("#notConform-r").html(notConformL);
 
 					var totalL = $x("#total-l").html();
 					var totalR = $x("#total-r").html();
@@ -154,102 +154,102 @@
 
 				$x("#linkage-l-neg").click(function() {
 					decrement("#linkage-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#linkage-l-plus").click(function() {
 					increment("#linkage-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#linkage-r-neg").click(function() {
 					decrement("#linkage-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#linkage-r-plus").click(function() {
 					increment("#linkage-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#trick-l-neg").click(function() {
 					decrement("#trick-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#trick-l-plus").click(function() {
 					increment("#trick-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#trick-r-neg").click(function() {
 					decrement("#trick-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#trick-r-plus").click(function() {
 					increment("#trick-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
-				});
-
-				$x("#beginner-l-neg").click(function() {
-					decrement("#beginner-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
-				});
-
-				$x("#beginner-l-plus").click(function() {
-					increment("#beginner-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
-				});
-
-				$x("#beginner-r-neg").click(function() {
-					decrement("#beginner-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
-				});
-
-				$x("#beginner-r-plus").click(function() {
-					increment("#beginner-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#teamWork-l-neg").click(function() {
 					decrement("#teamWork-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#teamWork-l-plus").click(function() {
 					increment("#teamWork-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#teamWork-r-neg").click(function() {
 					decrement("#teamWork-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#teamWork-r-plus").click(function() {
 					increment("#teamWork-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#score-l-neg").click(function() {
 					decrement("#score-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#score-l-plus").click(function() {
 					increment("#score-l");
-					total("#total-l", ["#linkage-l", "#trick-l", "#beginner-l", "#teamWork-l", "#score-l"]);
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
 				});
 
 				$x("#score-r-neg").click(function() {
 					decrement("#score-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#score-r-plus").click(function() {
 					increment("#score-r");
-					total("#total-r", ["#linkage-r", "#trick-r", "#beginner-r", "#teamWork-r", "#score-r"]);
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
+				});
+
+				$x("#notConform-l-neg").click(function() {
+					decrement("#notConform-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
+				});
+
+				$x("#notConform-l-plus").click(function() {
+					increment("#notConform-l");
+					total("#total-l", ["#linkage-l", "#trick-l", "#teamWork-l", "#score-l", "#notConform-l"]);
+				});
+
+				$x("#notConform-r-neg").click(function() {
+					decrement("#notConform-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
+				});
+
+				$x("#notConform-r-plus").click(function() {
+					increment("#notConform-r");
+					total("#total-r", ["#linkage-r", "#trick-r", "#teamWork-r", "#score-r", "#notConform-r"]);
 				});
 
 				$x("#save").click(function() {
@@ -265,15 +265,15 @@
 							"team-l": $x("#team-l option:selected").val(),
 							"linkage-l": $x("#linkage-l").html(),
 							"trick-l": $x("#trick-l").html(),
-							"beginner-l": $x("#beginner-l").html(),
 							"teamWork-l": $x("#teamWork-l").html(),
 							"score-l": $x("#score-l").html(),
+							"notConform-l": $x("#notConform-l").html(),
 							"team-r": $x("#team-r option:selected").val(),
 							"linkage-r": $x("#linkage-r").html(),
 							"trick-r": $x("#trick-r").html(),
-							"beginner-r": $x("#beginner-r").html(),
 							"teamWork-r": $x("#teamWork-r").html(),
-							"score-r": $x("#score-r").html()
+							"score-r": $x("#score-r").html(),
+							"notConform-r": $x("#notConform-r").html()
 						}, function(data) {
 							load(data);
 						});
@@ -432,39 +432,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- 初/女子/子供 -->
-				<div class="ui-field-contain">
-					<div class="ui-grid-d">
-						<div class="ui-block-a">
-							<div style="text-align: center; font-size: 0.7em;">初/女子/子供</div>
-						</div>
-						<div class="ui-block-b">
-							<div id="beginner-l" style="text-align: center;">0</div>
-						</div>
-						<div class="ui-block-c">
-						</div>
-						<div class="ui-block-d">
-							<div style="text-align: center; font-size: 0.7em;">初/女子/子供</div>
-						</div>
-						<div class="ui-block-e">
-							<div id="beginner-r" style="text-align: center;">0</div>
-						</div>
-						<div class="ui-block-a">
-							<button id="beginner-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
-						</div>
-						<div class="ui-block-b">
-							<button id="beginner-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
-						</div>
-						<div class="ui-block-c">
-						</div>
-						<div class="ui-block-d">
-							<button id="beginner-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_neg_1</i></button>
-						</div>
-						<div class="ui-block-e">
-							<button id="beginner-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
-						</div>
-					</div>
-				</div>
 				<!-- チームワーク -->
 				<div class="ui-field-contain">
 					<div class="ui-grid-d">
@@ -528,6 +495,39 @@
 						</div>
 						<div class="ui-block-e">
 							<button id="score-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #33ccff; border-color: #1c708c;"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+					</div>
+				</div>
+				<!-- コンセプト違反 -->
+				<div class="ui-field-contain">
+					<div class="ui-grid-d">
+						<div class="ui-block-a">
+							<div style="text-align: center; font-size: 0.5em;">コンセプト<br>違反</div>
+						</div>
+						<div class="ui-block-b">
+							<div id="notConform-l" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<div style="text-align: center; font-size: 0.5em;">コンセプト<br>違反</div>
+						</div>
+						<div class="ui-block-e">
+							<div id="notConform-r" style="text-align: center;">0</div>
+						</div>
+						<div class="ui-block-a">
+							<button id="notConform-l-plus" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="notConform-l-neg" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #ed1c24; border-color: #820f13;"><i class="material-icons">exposure_neg_1</i></button>
+						</div>
+						<div class="ui-block-c">
+						</div>
+						<div class="ui-block-d">
+							<button id="notConform-r-plus" class="ui-btn ui-mini ui-corner-all ui-shadow"><i class="material-icons">exposure_plus_1</i></button>
+						</div>
+						<div class="ui-block-e">
+							<button id="notConform-r-neg" class="ui-btn ui-mini ui-corner-all ui-shadow" style="background-color: #ed1c24; border-color: #820f13;"><i class="material-icons">exposure_neg_1</i></button>
 						</div>
 					</div>
 				</div>
